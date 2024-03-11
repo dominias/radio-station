@@ -5,7 +5,7 @@ class Day {
 		this.dayName = date
 			.toLocaleDateString("en-US", { weekday: "short" })
 			.toUpperCase();
-		this.dayMonthString = date.getDate() + "/" + date.getMonth() + 1;
+		this.dayMonthString = date.getDate() + "/" + (date.getMonth() + 1);
 		this.timeslots = timeslots;
 	}
 
@@ -17,7 +17,12 @@ class Day {
 		const dayLabel = document.createElement("div");
 		dayLabel.className = "day-label";
 
-		if (this.date.getDate() === new Date().getDate()) {
+		const currentDay = new Date();
+		if (
+			this.date.getFullYear() === currentDay.getFullYear() &&
+			this.date.getMonth() === currentDay.getMonth() &&
+			this.date.getDate() === currentDay.getDate()
+		) {
 			dayLabel.id = "current";
 		}
 
@@ -60,14 +65,17 @@ function renderDaysShown(currentDate, timeslots) {
 	let dayElements = [];
 	let containerElement = document.querySelector(".day-container");
 	for (let i = 0; i <= currentDate.getDay(); i++) {
-		let date = new Date();
+		let date = new Date(currentDate);
+		if (currentDate.getDate() === 1) {
+			console.log(currentDate.getDate() - (currentDate.getDay() - i));
+		}
 		date.setDate(currentDate.getDate() - (currentDate.getDay() - i));
 		dayElements.push(new Day(date, timeslots));
 		containerElement.appendChild(dayElements[i].render());
 	}
 
 	for (let i = currentDate.getDay() + 1; i <= 6; i++) {
-		let date = new Date();
+		let date = new Date(currentDate);
 		date.setDate(currentDate.getDate() + (i - currentDate.getDay()));
 		dayElements.push(new Day(date, timeslots));
 		containerElement.appendChild(dayElements[i].render());
@@ -76,6 +84,15 @@ function renderDaysShown(currentDate, timeslots) {
 	return dayElements;
 }
 
+function updateDaysShown(weekPointer, timeslots) {
+	let dayContainer = document.querySelector(".day-container");
+	dayContainer.innerHTML = "";
+	let newDate = new Date();
+	newDate.setDate(newDate.getDate() + 7 * weekPointer);
+	return renderDaysShown(newDate, timeslots);
+}
+
+// Add times
 document.addEventListener("DOMContentLoaded", () => {
 	const days = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
 	const times = ["10:00", "11:00", "12:00", "13:00", "14:00", "15:00"];
@@ -88,5 +105,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
 	// Holds all day divs
 	let daysElementsShown = renderDaysShown(currDate, timeslots);
+	// Pointer to indicate which week shown (0 is current week, ++ is next weeks, -- is prev weeks)
+	let weekPointer = 0;
 	console.log(daysElementsShown);
+
+	document.querySelectorAll(".back, .forward").forEach((button) => {
+		button.addEventListener("click", () => {
+			if (button.className === "back") {
+				daysElementsShown = updateDaysShown(--weekPointer, timeslots);
+			} else {
+				daysElementsShown = updateDaysShown(++weekPointer, timeslots);
+			}
+		});
+	});
 });

@@ -1,0 +1,108 @@
+.header {
+	width: 100%;
+	height: 10%;
+	padding: 10px 15px;
+	border-radius: 0 0 10px 10px;
+	background-color: #e4b5cb;
+	background-image: var(--gradient);
+	border-bottom: 2px solid var(--black);
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	color: var(--white);
+}
+
+.dummy {
+	min-width: 232.09px;
+	display: flex;
+	align-items: center;
+	transition: transform 0.1s ease-in-out;
+}
+
+.dummy:hover {
+	transform: scale(1.05);
+}
+
+.dummy a {
+	text-decoration: none;
+	font-size: 20px;
+	color: var(--white);
+	background-color: var(--light-black);
+	padding: 15px 30px;
+	border-radius: 10000px;
+	box-shadow: var(--shadow);
+}
+
+.clock {
+	text-decoration: none;
+	width: 13rem;
+	height: 100%;
+	border-radius: 12px;
+	border: 1px solid var(--purple);
+	background-color: var(--light-black);
+	font-weight: 200;
+	font-size: 25px;
+	box-shadow: var(--shadow);
+	user-select: none;
+	transition: transform 0.1s ease-in-out;
+}
+
+.clock:hover {
+	transform: scale(1.05);
+}
+
+.clock time {
+	height: 100%;
+	color: var(--white);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.clock span {
+	font-size: 15px;
+}
+
+.profile {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 1.5rem;
+}
+
+.profile .icon {
+	height: 3.5rem;
+	min-width: 3.5rem;
+	border-radius: 100%;
+	border: 1px solid var(--purple);
+	overflow: hidden;
+	background-color: var(--light-black);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: var(--white);
+	font-size: x-large;
+	box-shadow: var(--shadow);
+	transition: transform 0.1s ease-in-out;
+	user-select: none;
+}
+
+.profile .icon:hover {
+	transform: scale(1.05);
+}
+
+.user-details {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	color: var(--white);
+	font-weight: bold;
+	user-select: none;
+}
+
+.user-details span {
+	font-size: x-small;
+	color: rgba(255, 255, 255, 0.427);
+}

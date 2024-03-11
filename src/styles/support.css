@@ -1,0 +1,85 @@
+@import url("colors.css");
+
+button:hover,
+input[type="submit"] {
+	cursor: pointer;
+}
+
+.container {
+	height: 100%;
+	width: 40%;
+	padding: 40px 50px;
+	background-color: var(--black);
+	border-radius: 30px;
+	box-shadow: 0px 0px 50px 10px #151515;
+	grid-template-columns: repeat(7, minmax(0, 1fr));
+	display: flex;
+	flex-direction: column;
+	color: var(--white);
+	gap: 1rem;
+}
+
+.container section .title {
+	margin-bottom: 2rem;
+	width: 100%;
+	font-size: x-large;
+	text-align: center;
+}
+
+.container section div {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	gap: 0.75rem;
+}
+
+.container section .info {
+	flex-direction: row;
+	gap: 1rem;
+}
+
+.container section div label {
+	margin-right: auto;
+}
+
+.container section div input[type="text"],
+.container section div input[type="email"] {
+	width: 100%;
+	height: 2rem;
+	border-radius: 5px;
+	padding: 7px 9px;
+	background-color: var(--white);
+	color: var(--black);
+	transition: all 0.3s ease-in-out;
+}
+
+.container section div input[type="text"]:focus,
+.container section div input[type="email"]:focus,
+.container section div textarea:focus {
+	box-shadow: 0px 0px 20px 0px var(--purple);
+}
+
+.container section div textarea {
+	height: 12rem;
+	border-radius: 5px;
+	padding: 7px 9px;
+	resize: none;
+	background-color: var(--white);
+	transition: all 0.3s ease-in-out;
+}
+
+.container section div input[type="submit"] {
+	margin-top: 1rem;
+	height: 2.5rem;
+	width: 12rem;
+	border-radius: 5px;
+	background-color: var(--purple);
+	color: var(--white);
+	font-weight: bold;
+	box-shadow: var(--gradient);
+	transition: all 0.2s ease-in-out;
+}
+
+.container section div input[type="submit"]:hover {
+	background-color: var(--dark-purple)
+}

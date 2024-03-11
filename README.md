@@ -1,10 +1,6 @@
 # radio-station
-Repository for our group's radio station.
+Repository for our group's radio station, producer's section
 
 
 # Authors
-Philip Krupacs
-
 Dan Le
-
-William Ridenhour

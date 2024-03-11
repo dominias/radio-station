@@ -58,7 +58,7 @@ class Timeslot {
 // Renders all of the displayed days from current date
 function renderDaysShown(currentDate, timeslots) {
 	let dayElements = [];
-	let containerElement = document.querySelector(".container");
+	let containerElement = document.querySelector(".day-container");
 	for (let i = 0; i <= currentDate.getDay(); i++) {
 		let date = new Date();
 		date.setDate(currentDate.getDate() - (currentDate.getDay() - i));

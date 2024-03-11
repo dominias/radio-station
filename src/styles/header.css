@@ -30,6 +30,7 @@
 	background-color: var(--light-black);
 	padding: 15px 30px;
 	border-radius: 10000px;
+	border: 1px solid var(--purple);
 	box-shadow: var(--shadow);
 }
 

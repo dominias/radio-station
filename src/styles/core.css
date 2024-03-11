@@ -8,7 +8,7 @@ input[type="submit"] {
 .container {
 	height: 100%;
 	width: 100%;
-	padding: 30px;
+	padding: 30px 80px;
 	background-color: var(--black);
 	border-radius: 30px;
 	box-shadow: 0px 0px 50px 10px #151515;
@@ -58,12 +58,8 @@ input[type="submit"] {
 	font-weight: normal;
 }
 
-.day table {
-	height: 100%;
+.day .timeslot-container {
 	width: 100%;
-}
-
-.day tbody {
 	height: 100%;
 	display: flex;
 	flex-direction: column;
@@ -71,18 +67,12 @@ input[type="submit"] {
 	justify-content: space-evenly;
 }
 
-.day tr {
-	width: 100%;
-	display: flex;
-	justify-content: center;
-}
-
-.day td {
-	width: 6.5rem;
-	height: 2.5rem;
+.day .timeslot {
+	width: 75%;
+	height: 2.25rem;
 	background-color: var(--purple);
-	box-shadow: -3px 3px 0px 1px #5820b4;
-	border-radius: 5px;
+	box-shadow: 0px 2px 0px 1px #5820b4;
+	border-radius: 20px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -90,7 +80,7 @@ input[type="submit"] {
 	user-select: none;
 }
 
-.day td:hover {
+.day .timeslot:hover {
 	cursor: pointer;
 	transform: scale(1.05);
 }

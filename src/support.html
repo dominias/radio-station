@@ -1,94 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles/header.css">
-    <link rel="stylesheet" href="styles/support.css">
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            border: 0;
-            font-family: Verdana, Geneva, Tahoma, sans-serif;
-            scroll-behavior: smooth;
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+            content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet"
+            href="styles/header.css">
+        <link rel="stylesheet"
+            href="styles/support.css">
+        <style>
+            * {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+                border: 0;
+                font-family: Verdana, Geneva, Tahoma, sans-serif;
+                scroll-behavior: smooth;
 
-        }
+            }
 
-        html,
-        body {
-            width: 100%;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-    </style>
-    <title>Radio Station</title>
-</head>
+            html,
+            body {
+                width: 100%;
+                height: 100vh;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+        </style>
+        <script
+            src="scripts/support/support.js"></script>
+        <title>Radio Station</title>
+    </head>
 
-<body style="background-color: #2b2830;
+    <body style="background-color: #2b2830;
 background-image: linear-gradient(to top, #2b2830 0%, #1c1c1c 74%);
 ">
-    <div class="header">
-        <div class="dummy">
-            <a href="support.html">
-                contact
-            </a>
-        </div>
-        <a class="clock" href="index.html">
-            <time>12:45<span>February 28</span></time>
-        </a>
-        <div class="profile">
-            <div class="user-details">
-                Dwayne Johnson
-                <span>Producer</span>
+        <div class="header">
+            <div class="dummy">
+                <a href="support.html">
+                    contact
+                </a>
             </div>
-            <button class="icon">
-                DJ
-            </button>
-        </div>
-    </div>
-    <main
-        style="height: 100%; width: 100%; padding: 2rem; display: flex; justify-content: center;">
-        <form class="container">
-            <section>
-                <div class="title">Contact the Team</div>
-            </section>
-            <section>
-                <div class="fields"
-                    style="height: 100%; display: flex; flex-direction: column; align-items: center;  gap: 2rem;">
-                    <div class="subject">
-                        <label for="subject">subject</label>
-                        <input type="text" name="Subject"
-                            placeholder="subject line" required>
-                    </div>
-                    <div class="info">
-                        <div class="name">
-                            <label for="name">name</label>
-                            <input type="text" name="name"
-                                placeholder="first & last name" required>
-                        </div>
-                        <div class="email">
-                            <label for="email">email</label>
-                            <input type="email" name="email"
-                                pattern="[^@\s]+@[^@\s]+"
-                                placeholder="johnsmith@gmail.com" required>
-                        </div>
-                    </div>
-                    <div class="question">
-                        <label for="question">question</label>
-                        <textarea name="question"
-                            placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed iaculis elit pulvinar, pellentesque dolor ut, pellentesque purus. Proin tincidunt ultricies augue, convallis vulputate nisl.question here"
-                            required></textarea>
-                    </div>
-                    <input type="submit" value="submit" />
+            <a class="clock" href="index.html">
+                <time>12:45<span>February
+                        28</span></time>
+            </a>
+            <div class="profile">
+                <div class="user-details">
+                    Dwayne Johnson
+                    <span>Producer</span>
                 </div>
-            </section>
-        </form>
-    </main>
-</body>
+                <button class="icon">
+                    DJ
+                </button>
+            </div>
+        </div>
+        <main
+            style="height: 100%; width: 100%; padding: 2rem; display: flex; justify-content: center;">
+            <form class="container">
+                <section>
+                    <div class="title">Contact the
+                        Team</div>
+                </section>
+                <section>
+                    <div class="fields"
+                        style="height: 100%; display: flex; flex-direction: column; align-items: center;  gap: 2rem;">
+                        <div class="subject">
+                            <label
+                                for="subject">subject</label>
+                            <input type="text"
+                                name="subject"
+                                placeholder="subject line">
+                        </div>
+                        <div class="info">
+                            <div class="name">
+                                <label
+                                    for="name">name</label>
+                                <input type="text"
+                                    name="name"
+                                    placeholder="first & last name">
+                            </div>
+                            <div class="email">
+                                <label
+                                    for="email">email</label>
+                                <input
+                                    type="email"
+                                    name="email"
+                                    pattern="[^@\s]+@[^@\s]+"
+                                    placeholder="johnsmith@gmail.com">
+                            </div>
+                        </div>
+                        <div class="question">
+                            <label
+                                for="question">question</label>
+                            <textarea
+                                name="question"
+                                placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed iaculis elit pulvinar, pellentesque dolor ut, pellentesque purus. Proin tincidunt ultricies augue, convallis vulputate nisl.question here"></textarea>
+                        </div>
+                        <input type="submit"
+                            value="submit" />
+                    </div>
+                </section>
+            </form>
+        </main>
+    </body>
 
 </html>

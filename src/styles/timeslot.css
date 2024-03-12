@@ -5,6 +5,20 @@ input[type="submit"] {
 	cursor: pointer;
 }
 
+.timeslot-modal {
+	display: none;
+	height: 100%;
+	width: 100%;
+	padding: 2rem;
+	position: fixed;
+	z-index: 1;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	background-color: rgba(0, 0, 0, 0.71);
+	gap: 2.5rem;
+}
+
 .title {
 	color: var(--white);
 	font-weight: bold;

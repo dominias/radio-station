@@ -2,9 +2,7 @@ class Day {
 	// date Date object, array of times
 	constructor(date, times) {
 		this.date = date;
-		this.dayName = date
-			.toLocaleDateString("en-US", { weekday: "short" })
-			.toUpperCase();
+		this.dayName = date.toLocaleDateString("en-US", { weekday: "short" }).toUpperCase();
 		this.dayMonthString = date.getDate() + "/" + (date.getMonth() + 1);
 		this.times = times;
 		this.timeslots = []; // holds Timeslot objects
@@ -64,6 +62,7 @@ class Timeslot {
 
 		elem.addEventListener("click", () => {
 			this.taken = true;
+			openAssignDJModal();
 			elem.classList.add("taken");
 		});
 

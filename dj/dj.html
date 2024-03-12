@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>DJ</title>
+        <link href="dj.css" rel="stylesheet">
+
+        <script src="dj.js"></script>
+        <script src="djdata.js"></script>
+        <script src="djlists.js"></script>
+    </head>
+
+    <body>
+        <main>
+            <header>
+                <section class="header-tool">
+                    <button id="list-vis" onClick="vis('list-vis')">Playlists</button>
+                    <button id="slot-vis" onClick="vis('slot-vis')">Timeslots</button>
+                    <button id="date-vis" onClick="vis('date-vis')">Dates</button>
+                </section>
+
+                <section style="margin-bottom: 5px;" class="header-time">
+                    <time>4 00 PM 4/01/2024</time>
+                </section>
+
+                <section class="header-user">
+                    <p>Smith</p>
+                    <p>DJ</p>
+                </section>
+            </header>
+            <hr>
+
+            <section id="weekdates">
+                <section class="week" id="week">
+                    <button>Last</button>
+                    <p>4/03 - 4/09</p>
+                    <button>Next</button>
+                </section>
+                <hr>
+                <section class="date" id="date">
+                    <button class="date-option">SUN <br> 3</button>
+                    <button class="date-option">MON <br> 4</button>
+                    <button class="date-option">TUE <br> 5</button>
+                    <button class="date-option">WED <br> 6</button>
+                    <button class="date-option">THU <br> 7</button>
+                    <button class="date-option">FRI <br> 8</button>
+                    <button class="date-option">SAT <br> 9</button>
+                </section>
+                <hr>
+            </section>
+
+            <section id="timeslots">
+                <section class="time" id="slot"></section>
+
+                <section class="details" id="details">
+                    <p id="slot-name"></p>
+                    <p id="slot-time"></p>
+                    <p id="slot-open"></p>
+                    <button style="margin: auto; border-radius: 15px;">Select Timeslot</button>
+                </section>
+            </section>
+
+            <section class="playlists-and-records" id="playlists">
+                <section class="playlists">
+                    <h1>Playlists</h1>
+                    <hr>
+                    <ul class="playlist-list" id="playlist-list"></ul>
+                </section>
+                
+                <section class="records">
+                    <h1>Records</h1>
+                    <hr>     
+                    <ul class="record-list" id="records-list"></ul>
+                </section>
+            </section>
+        </main>
+    </body>
+</html>

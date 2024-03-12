@@ -31,6 +31,8 @@
             }
 
         </style>
+
+        <script src="djextra.js"></script>
     </head>
 
     <body>            
@@ -61,15 +63,15 @@
 
         <hr> <h3>Form</h3> <hr>
 
-        <form>
+        <form id="form">
             <label>Name</label>
-            <input type="text" name="name" required>
+            <input type="text" name="name" id="name">
 
             <label>Email</label>
-            <input type="email" name="email" required>
+            <input type="email" name="email" id="email" placeholder="example@email.com">
 
             <label>Phone Number</label>
-            <input style="margin-bottom: 10px;" type="tel" name="phone-number">
+            <input style="margin-bottom: 10px;" type="tel" name="phone-number" placeholder="405-143-9334">
             
             <label>I want to receive marketing emails.</label>
             <input type="checkbox" name="marketing"> 
@@ -82,7 +84,7 @@
             <label style="margin-top: 10px;">Date</label>
             <input style="margin: auto; margin-top: 10px;" type="date" name="date">
 
-            <input style="margin-top: 10px;" type="submit" value="Submit">
+            <input style="margin-top: 10px;" type="submit" value="Submit" id="submit">
         </form>
 
         <hr> <h3>Description List</h3> <hr>

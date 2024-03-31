@@ -1,161 +1,149 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport"
-            content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet"
-            href="styles/core.css">
-        <link rel="stylesheet"
-            href="styles/header.css">
-        <link rel="stylesheet"
-            href="styles/assigndj.css">
-        <link rel="stylesheet"
-            href="styles/timeslot.css">
-        <style>
-            * {
-                box-sizing: border-box;
-                margin: 0;
-                padding: 0;
-                border: 0;
-                font-family: Verdana, Geneva, Tahoma, sans-serif;
-                scroll-behavior: smooth;
-            }
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/core.css">
+    <link rel="stylesheet" href="styles/header.css">
+    <link rel="stylesheet" href="styles/assigndj.css">
+    <link rel="stylesheet" href="styles/timeslot.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            border: 0;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            scroll-behavior: smooth;
+        }
 
-            html,
-            body {
-                width: 100%;
-                height: 100vh;
-                display: flex;
-                flex-direction: column;
-            }
-        </style>
-        <script
-            src="scripts/indexPage/core.js"></script>
-        <script
-            src="scripts/indexPage/timeslot.js"></script>
-        <script
-            src="scripts/indexPage/assignDJ.js"></script>
-        <title>Radio Station</title>
-    </head>
+        html,
+        body {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+    </style>
+    <script src="scripts/indexPage/core.js"></script>
+    <script src="scripts/indexPage/timeslot.js"></script>
+    <script src="scripts/indexPage/assignDJ.js"></script>
+    <title>Radio Station</title>
+</head>
 
-    <body style="background-color: #2b2830;
+<body style="background-color: #2b2830;
 background-image: linear-gradient(to top, #2b2830 0%, #1c1c1c 74%);
 ">
-        <div class="header">
-            <div class="dummy">
-                <a href="support.html">
-                    contact
-                </a>
-            </div>
-            <a class="clock" href="index.html">
-                <time>12:45<span>February
-                        28</span></time>
+    <div class="header">
+        <div class="dummy">
+            <a href="support.html">
+                contact
             </a>
-            <div class="profile">
-                <div class="user-details">
-                    Dwayne Johnson
-                    <span>Producer</span>
-                </div>
-                <button class="icon">
-                    DJ
-                </button>
-            </div>
         </div>
-        <main
-            style="height: 100%; width: 100%; padding: 2rem 1rem;">
-            <div class="main-section">
-                <button class="back"><</button>
-                <div class="day-container">
-                    <!-- <div class="day">
+        <a class="clock" href="index.html">
+            <time>12:45<span>February
+                    28</span></time>
+        </a>
+        <div class="profile">
+            <div class="user-details">
+                Dwayne Johnson
+                <span>Producer</span>
+            </div>
+            <button class="icon">
+                DJ
+            </button>
+        </div>
+    </div>
+    <main style="height: 100%; width: 100%; padding: 2rem 0rem;">
+        <div class="main-section">
+            <button class="back">
+                &lt</button>
+            <div class="day-container">
+                <!-- <div class="day">
                     <div class="day-label">SUN<span>2/25</span></div>
                     <div class="timeslot-container">
                         timeslots added here
                     </div>
                 </div> -->
-                </div>
-                <button class="forward">></button>
             </div>
-        </main>
-        <div class="assign-dj-modal"
-            onclick="closeAssignDJModal(event)">
-            <div class="container">
-                <div class="overview-section">
+            <button class="forward">&gt</button>
+        </div>
+    </main>
+    <div class="assign-dj-modal" onclick="closeAssignDJModal(event)">
+        <div class="container">
+            <div class="overview-section">
+                <div class="icon">JS</div>
+                <div class="name">John Smith
+                </div>
+            </div>
+            <div class="list-section">
+                <span>Assign a DJ</span>
+                <div class="dj-list">
+                    <div class="dj-container">
+                        DJ</div>
+                    <div class="dj-container">
+                        DJ</div>
+                    <div class="dj-container">
+                        DJ</div>
+                    <div class="dj-container">
+                        DJ</div>
+                    <div class="dj-container">
+                        DJ</div>
+                    <div class="dj-container">
+                        DJ</div>
+                    <div class="dj-container">
+                        DJ</div>
+                    <div class="dj-container">
+                        DJ</div>
+                    <div class="dj-container">
+                        DJ</div>
+                    <div class="dj-container">
+                        DJ</div>
+                    <div class="dj-container">
+                        DJ</div>
+                    <div class="dj-container">
+                        DJ</div>
+                    <div class="dj-container">
+                        DJ</div>
+                    <div class="dj-container">
+                        DJ</div>
+                    <div class="dj-container">
+                        DJ</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="timeslot-modal" onclick="closeTimeSlotModal(event)">
+        <div class="title">
+            <time>13:00</time><span>February
+                28, 2024</span>
+        </div>
+        <div class="container">
+            <div class="overview-section">
+                <div class="profile">
                     <div class="icon">JS</div>
-                    <div class="name">John Smith
-                    </div>
+                    <div class="name">John
+                        Smith</div>
                 </div>
-                <div class="list-section">
-                    <span>Assign a DJ</span>
-                    <div class="dj-list">
-                        <div class="dj-container">
-                            DJ</div>
-                        <div class="dj-container">
-                            DJ</div>
-                        <div class="dj-container">
-                            DJ</div>
-                        <div class="dj-container">
-                            DJ</div>
-                        <div class="dj-container">
-                            DJ</div>
-                        <div class="dj-container">
-                            DJ</div>
-                        <div class="dj-container">
-                            DJ</div>
-                        <div class="dj-container">
-                            DJ</div>
-                        <div class="dj-container">
-                            DJ</div>
-                        <div class="dj-container">
-                            DJ</div>
-                        <div class="dj-container">
-                            DJ</div>
-                        <div class="dj-container">
-                            DJ</div>
-                        <div class="dj-container">
-                            DJ</div>
-                        <div class="dj-container">
-                            DJ</div>
-                        <div class="dj-container">
-                            DJ</div>
-                    </div>
-                </div>
+                <button class="change-dj" onclick="changeDJ(event)">Change
+                    DJ</button>
+            </div>
+            <div class="playlist-section">
+                <span>Pop Bops Playlist</span>
+                <ol class="song-list">
+                    <li>Perfect Night - LE
+                        SSERAFIM</li>
+                    <li>NIGHT DANCER - imase
+                    </li>
+                    <li>Saturn - SZA</li>
+                    <li>Seven - Jungkook</li>
+                    <button>+ add
+                        song</button>
+                </ol>
             </div>
         </div>
-        <div class="timeslot-modal"
-            onclick="closeTimeSlotModal(event)">
-            <div class="title">
-                <time>13:00</time><span>February
-                    28, 2024</span>
-            </div>
-            <div class="container">
-                <div class="overview-section">
-                    <div class="profile">
-                        <div class="icon">JS</div>
-                        <div class="name">John
-                            Smith</div>
-                    </div>
-                    <button
-                        class="change-dj"
-                        onclick="changeDJ(event)">Change
-                        DJ</button>
-                </div>
-                <div class="playlist-section">
-                    <span>Pop Bops Playlist</span>
-                    <ol class="song-list">
-                        <li>Perfect Night - LE
-                            SSERAFIM</li>
-                        <li>NIGHT DANCER - imase
-                        </li>
-                        <li>Saturn - SZA</li>
-                        <li>Seven - Jungkook</li>
-                        <button>+ add
-                            song</button>
-                    </ol>
-                </div>
-            </div>
-        </div>
-    </body>
+    </div>
+</body>
 
 </html>

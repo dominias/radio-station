@@ -1,0 +1,18 @@
+{
+	"name": "radio-station",
+	"version": "1.0.0",
+	"description": "swe 432 project",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"@emotion/react": "^11.11.4",
+		"@emotion/styled": "^11.11.5",
+		"@mui/icons-material": "^5.15.14",
+		"@mui/material": "^5.15.14",
+		"express": "^4.19.2"
+	}
+}

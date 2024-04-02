@@ -58,6 +58,7 @@ class DJ {
 			});
 		}
 		timeslot.setDJ(newDJ);
+		window.TimeslotModal.setPlaylistSongs(timeslot);
 		window.TimeslotModal.setTimeslotDJ(timeslot.DJ);
 		window.DJModal.closeAssignDJModal(e);
 		window.TimeslotModal.openTimeSlotModal(timeslot);

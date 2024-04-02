@@ -3,7 +3,7 @@ const handlePage = (app, djHandler, songHandler) => {
 		// replace with fetch to get djs from mongodb later
 		resp.render("index", {
 			djs: djHandler.getDJs(),
-			songs: songHandler.getSongs(),
+			songs: songHandler.initSongs(),
 		});
 	});
 
@@ -12,7 +12,7 @@ const handlePage = (app, djHandler, songHandler) => {
 	});
 
 	app.get("/songModal", (req, resp) => {
-		resp.render("songModal", { songs: songHandler.getSongs() });
+		resp.render("songModal", { songs: songHandler.initSongs() });
 	});
 };
 module.exports = {

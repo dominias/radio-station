@@ -4,7 +4,7 @@ const timeslotDB = require("./data/timeslotDB");
 const { getTimeslot } = require("./timeslotHandler");
 
 // Initial Fetch
-const getSongs = () => {
+const initSongs = () => {
 	// get data from company provider
 	songs.sort(songComparison);
 	songs.forEach((song, i) => {
@@ -14,15 +14,15 @@ const getSongs = () => {
 };
 
 // for later use when fetching again from DB of timeslot
-
-// const handleGetSongList = (app) => {
-// 	app.get("/api/getSongList", (req, resp) => {
-// 		const songsList = getSongs();
-// 		songsList.sort(songComparison);
-// 		console.log(songsList);
-// 		resp.json(getSongs().sort(songComparison));
-// 	});
-// };
+const getSongsFromPlaylist = (app) => {
+	app.get("/api/timeslot/:id", (req, resp) => {
+		const idToFind = req.params.id;
+		const foundTimeslot = timeslotDB.getData().find((timeslot) => timeslot.id === idToFind);
+		resp.render("partials/playlistSongs.ejs", {
+			playlist: foundTimeslot.songs,
+		});
+	});
+};
 
 const querySongList = (app) => {
 	app.get("/api/searchSongs", (req, resp) => {
@@ -74,7 +74,8 @@ function songComparison(songA, songB) {
 }
 
 module.exports = {
-	getSongs,
+	initSongs,
+	getSongsFromPlaylist,
 	querySongList,
 	addSongToPlaylist,
 };

@@ -7,7 +7,7 @@ class TimeslotModal {
 	openTimeSlotModal(timeslot) {
 		this.timeslot = timeslot;
 		// // Used to dynamically update the songs and active DJ on the modal
-		// this.setPlaylistSongs(timeslot.songs);
+		this.setPlaylistSongs(timeslot);
 		this.setTimeslotDJ(timeslot.DJ);
 		document.querySelector(".timeslot-modal").style.display = "flex";
 	}
@@ -22,9 +22,21 @@ class TimeslotModal {
 		}
 	}
 
-	// setPlaylistSongs(songs) {
-
-	// }
+	// Sets Playlist information
+	async setPlaylistSongs(timeslot) {
+		await fetch(`/api/timeslot/${timeslot.id}`)
+			.then((response) => response.text())
+			.then((html) => {
+				document.querySelector(".timeslot-playlist-songs").innerHTML =
+					html +
+					`                                    <button
+				class="add-song-button"
+				onclick="window.TimeslotModal.handleAddSongClick(event)">+
+				add
+				song</button>`;
+				document.querySelector(".song-playlist-songs").innerHTML = html;
+			});
+	}
 
 	// Sets DJ information
 	setTimeslotDJ(DJ) {

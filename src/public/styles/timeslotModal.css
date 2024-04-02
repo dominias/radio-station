@@ -19,54 +19,38 @@ input[type="submit"] {
 	gap: 2.5rem;
 }
 
-.title {
-	color: var(--white);
-	font-weight: bold;
-	font-size: 60px;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-}
-
-.title span {
-	font-size: 15px;
-}
-
-.container {
-	position: relative;
-	height: 80%;
-	width: 60%;
-	padding: 50px;
+.timeslot-modal-container {
+	height: 100%;
+	width: 50%;
+	padding: 4rem;
 	background-color: var(--black);
 	border-radius: 30px;
 	box-shadow: 0px 0px 50px 10px #151515;
-	grid-template-columns: repeat(7, minmax(0, 1fr));
 	display: flex;
 	color: var(--white);
-	gap: 4rem;
+	gap: 5rem;
 }
 
-.overview-section {
+.timeslot-overview-section {
 	width: 40%;
 	height: 100%;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	justify-content: space-evenly;
-	gap: 4rem;
+	justify-content: center;
+	gap: 3rem;
 }
 
-.overview-section .profile {
+.timeslot-overview-section .profile {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	gap: 25px;
 }
 
-.overview-section .icon {
-	height: 15rem;
-	width: 15rem;
+.timeslot-overview-section .icon {
+	height: 12rem;
+	width: 12rem;
 	border-radius: 30px;
 	border: 1px solid var(--purple);
 	overflow: hidden;
@@ -80,15 +64,15 @@ input[type="submit"] {
 	user-select: none;
 }
 
-.overview-section .name {
+.timeslot-overview-section .name {
 	font-weight: bold;
 	font-size: 25px;
 }
 
-.overview-section button {
+.timeslot-overview-section button {
 	height: 3rem;
 	width: 12rem;
-	border-radius: 5px;
+	border-radius: 15px;
 	background-color: var(--purple);
 	color: var(--white);
 	font-weight: bold;
@@ -96,7 +80,7 @@ input[type="submit"] {
 	transition: all 0.1s ease-in-out;
 }
 
-.overview-section button:hover {
+.timeslot-overview-section button:hover {
 	transform: scale(1.05);
 	background-color: var(--dark-purple);
 }
@@ -108,12 +92,12 @@ input[type="submit"] {
 	flex-direction: column;
 	align-items: center;
 	justify-content: space-between;
-	gap: 2rem;
+	gap: 4rem;
 }
 
 .playlist-section span {
 	font-weight: bold;
-	font-size: 30px;
+	font-size: 20px;
 	border: 1px solid var(--purple);
 	background-color: var(--black);
 	box-shadow: var(--shadow);
@@ -121,11 +105,11 @@ input[type="submit"] {
 	padding: 15px 30px;
 }
 
-.song-list {
+.timeslot-playlist-songs {
 	width: 100%;
 	height: 100%;
 	padding: 30px;
-	border-radius: 5px;
+	border-radius: 20px;
 	border-width: 0 2px 0 2px;
 	border-style: solid;
 	border-color: var(--purple);
@@ -146,12 +130,13 @@ ol {
 }
 
 li,
-.song-list button {
+.timeslot-playlist-songs button {
 	width: 100%;
 	background-color: var(--black);
 	font-weight: normal;
 	padding: 10px 15px;
-	border-radius: 30px;
+	border-radius: 15px;
+	border: 1px solid var(--dark-purple);
 	box-shadow: var(--shadow);
 	transition: all 0.1s ease-in-out;
 	user-select: none;
@@ -163,12 +148,12 @@ li:hover {
 	transform: scale(1.025);
 }
 
-.song-list button {
+.timeslot-playlist-songs button {
 	width: 10rem;
 	background-color: var(--purple);
 }
 
-.song-list button:hover {
+.timeslot-playlist-songs button:hover {
 	background-color: var(--dark-purple);
 	transform: scale(1.025);
 }

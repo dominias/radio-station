@@ -39,7 +39,7 @@ class Day {
 		// Append timeslots to day
 
 		this.times.forEach((time, i) => {
-			this.timeslots.push(new Timeslot(time));
+			this.timeslots.push(new Timeslot(this.date, time));
 			timeslotContainer.appendChild(this.timeslots[i].render());
 		});
 
@@ -47,25 +47,40 @@ class Day {
 	}
 }
 
+// Represents the timeslot divs on the screen
 class Timeslot {
-	// time is of type string
-	constructor(time) {
+	constructor(day, time) {
+		this.id = day + time;
+		this.day = day;
 		this.time = time;
+		this.DJ = null;
+		this.songs = [];
+		this.element = null;
 		this.taken = false;
+	}
+
+	// set DJ object for timeslot from the assignDJ class to indicate that the timeslot is now taken by the DJ
+	setDJ(DJ) {
+		this.DJ = DJ;
+		this.taken = true;
+		this.element.classList.add("taken");
 	}
 
 	render() {
 		const elem = document.createElement("div");
 		elem.className = "timeslot";
 		elem.textContent = this.time;
-		this.element = elem;
 
+		// When click on timeslot button, opens modal and passes in object to modal
 		elem.addEventListener("click", () => {
-			this.taken = true;
-			openAssignDJModal();
-			elem.classList.add("taken");
+			if (this.taken) {
+				window.TimeslotModal.openTimeSlotModal(this);
+			} else {
+				window.DJModal.openAssignDJModal(this);
+			}
 		});
 
+		this.element = elem;
 		return elem;
 	}
 }
@@ -110,7 +125,6 @@ document.addEventListener("DOMContentLoaded", () => {
 	let daysElementsShown = renderDaysShown(currDate, times);
 	// Pointer to indicate which week shown (0 is current week, ++ is next weeks, -- is prev weeks)
 	let weekPointer = 0;
-	console.log(daysElementsShown);
 
 	document.querySelectorAll(".back, .forward").forEach((button) => {
 		button.addEventListener("click", () => {

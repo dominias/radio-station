@@ -1,0 +1,34 @@
+<% songs.forEach(song=> { %>
+    <div class="song"
+        onclick="addSong('<%=song.title%>', '<%=song.artist%>')"
+        data-id="<%=song.title+song.artist%>">
+        <div class="song-icon">
+            <%=
+                song.title.slice(0,2).toUpperCase()%>
+        </div>
+        <div class="song-details">
+            <div class="song-title">
+                <%=song.title%>
+            </div>
+            <div class="song-author">
+                <%= song.artist%>
+            </div>
+        </div>
+    </div>
+    <% }) %>
+
+        <script>
+            async function addSong(title, artist) {
+                const timeslotId = window.SongModal.timeslot.id;
+                await fetch(`/api/timeslot/${timeslotId}/addSong?title=${title}&artist=${artist}`, { method: "POST" }).then((response) => response.text())
+                    .then((html) => {
+                        document.querySelector(".timeslot-playlist-songs").innerHTML = html + `                                    <button
+                                            class="add-song-button"
+                                            onclick="window.TimeslotModal.handleAddSongClick(event)">+
+                                            add
+                                            song</button>`;
+                        document.querySelector(".song-playlist-songs").innerHTML = html
+                    });
+            }
+
+        </script>

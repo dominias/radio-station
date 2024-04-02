@@ -4,11 +4,14 @@
 	"description": "swe 432 project",
 	"main": "index.js",
 	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1"
+		"dev": "nodemon --ext js,css,ejs --ignore public app.js"
 	},
 	"author": "",
 	"license": "ISC",
 	"dependencies": {
-		"express": "^4.19.2"
+		"connect-livereload": "^0.6.1",
+		"ejs": "^3.1.9",
+		"express": "^4.19.2",
+		"livereload": "^0.9.3"
 	}
 }

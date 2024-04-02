@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+            content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet"
+            href="styles/core.css">
+        <link rel="stylesheet"
+            href="styles/header.css">
+        <link rel="stylesheet"
+            href="styles/assigndj.css">
+        <link rel="stylesheet"
+            href="styles/timeslotModal.css">
+        <link rel="stylesheet"
+            href="styles/songModal.css">
+        <style>
+            * {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+                border: 0;
+                font-family: Verdana, Geneva, Tahoma, sans-serif;
+                scroll-behavior: smooth;
+            }
+
+            html,
+            body {
+                width: 100%;
+                height: 100vh;
+                display: flex;
+                flex-direction: column;
+            }
+        </style>
+        <script
+            src="scripts/indexPage/timeslot.js"></script>
+        <script
+            src="scripts/indexPage/timeslotModal.js"></script>
+        <script
+            src="scripts/indexPage/assignDJ.js"></script>
+        <script
+            src="scripts/indexPage/songModal.js"></script>
+        <title>Radio Station</title>
+    </head>
+
+    <body style="background-color: #2b2830;
+background-image: linear-gradient(to top, #2b2830 0%, #242424 74%);
+">
+        <div class="header">
+            <div class="dummy">
+                <a href="/contact">
+                    contact
+                </a>
+            </div>
+            <time class="clock"
+                href="/">12:45<span>February
+                    28</span></time>
+            <div class="profile">
+                <div class="user-details">
+                    Dwayne Johnson
+                    <span>Producer</span>
+                </div>
+                <button class="icon">
+                    DJ
+                </button>
+            </div>
+        </div>
+        <main
+            style="height: 100%; width: 100%; padding: 3rem;">
+            <div class="main-section">
+                <button class="back">
+                    &lt</button>
+                <div class="day-container">
+                    <!-- <div class="day">
+                    <div class="day-label">SUN<span>2/25</span></div>
+                    <div class="timeslot-container">
+                        timeslots added here
+                    </div>
+                </div> -->
+                </div>
+                <button
+                    class="forward">&gt</button>
+            </div>
+        </main>
+        <div class="assign-dj-modal"
+            onclick="window.DJModal.closeAssignDJModal(event)">
+            <div class="assigndj-container">
+                <div
+                    class="assigndj-overview-section">
+                    <div class="icon">JS</div>
+                    <div class="name">John Smith
+                    </div>
+                </div>
+                <div class="list-section">
+                    <span>Assign a DJ</span>
+                    <div class="dj-list">
+                        <%djs.forEach(dj=> {%>
+                            <div class="dj"
+                                data-name="<%= dj%>">
+                                <%=dj%>
+                            </div>
+                            <%}); %>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="timeslot-modal"
+            onclick="window.TimeslotModal.closeTimeSlotModal(event)">
+            <div class="timeslot-modal-container">
+                <div
+                    class="timeslot-overview-section">
+                    <div class="profile">
+                        <div class="icon">
+                        </div>
+                        <div class="name">
+                        </div>
+                    </div>
+                    <button class="change-dj"
+                        onclick="window.TimeslotModal.changeDJ(event)">Change
+                        DJ</button>
+                </div>
+                <div class="playlist-section">
+                    <span>Pop Bops
+                        Playlist</span>
+                    <ol
+                        class="timeslot-playlist-songs">
+                        <% if (locals.playlist)
+                            {%>
+                            <%- include('partials/playlistSongs.ejs',
+                                { playlist }) %>
+                                <% } %>
+                                    <button
+                                        class="add-song-button"
+                                        onclick="window.TimeslotModal.handleAddSongClick(event)">+
+                                        add
+                                        song</button>
+                    </ol>
+                </div>
+            </div>
+        </div>
+        <div class="song-modal"
+            onclick="window.SongModal.closeSongModal(event)">
+            <div class="song-modal-container">
+                <div class="playlist-section">
+                    <span>Pop Bops
+                        Playlist</span>
+                    <ol
+                        class="song-playlist-songs">
+                        <% if (locals.playlist)
+                            {%>
+                            <%- include('partials/playlistSongs.ejs',
+                                { playlist }) %>
+                                <% } %>
+                    </ol>
+                </div>
+                <div class="songs-section">
+                    <input class="search-bar"
+                        placeholder="What song do you want to add?" />
+                    <div class="songs-list">
+                        <%- include('partials/songList.ejs',
+                            { songs }) %>
+                    </div>
+                    <button
+                        onclick="window.SongModal.handleFinishClick(event)">Finish</button>
+                </div>
+    </body>
+
+</html>

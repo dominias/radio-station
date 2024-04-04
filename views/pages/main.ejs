@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Main</title>
+
+        <link href="../../static/css/main.css" rel="stylesheet">
+
+        <script src="../../static/javascript/main.js"></script>         
+        <script>
+            var timedata = `<%- JSON.stringify(timeData) %>`;
+            var listdata = `<%- JSON.stringify(listData) %>`; 
+        </script>
+    </head>
+    
+    <body>
+        <main>
+            <header>
+                <%- include('../partials/tool-section'); %>
+
+                <%- include('../partials/date-time'); %>
+
+                <section class="header-user">
+                    <p></p>
+                    <p></p>
+                </section>
+            </header>
+            <hr>
+
+            <%- include('../partials/date-section'); %>
+
+            <%- include('../partials/time-section'); %>
+
+            <section class="playlists-and-records" id="playlists">
+                <section class="playlists">
+                    <h1>Lists</h1>
+                    <hr>
+                    <ul class="playlist-list" id="playlist-list"></ul>
+                </section>
+                
+                <section class="records">
+                    <h1>Records</h1>
+                    <hr>     
+                    <ul class="record-list" id="records-list"></ul>
+                </section>
+            </section>
+        </main>
+    </body>
+</html>

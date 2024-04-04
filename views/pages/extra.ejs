@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Extra</title>
+
+        <script src="extra.js"></script>
+
+        <style>
+            form {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+
+                margin: 5px;
+                width: 30%;
+            }
+
+        </style>
+    </head>
+
+    <body>            
+        <hr> <h3>Form</h3> <hr>
+
+        <form id="form">
+            <label>Name</label>
+            <input type="text" name="name" id="name">
+
+            <label>Email</label>
+            <input type="email" name="email" id="email" placeholder="example@email.com">
+
+            <label>Phone Number</label>
+            <input style="margin-bottom: 10px;" type="tel" name="phone-number" placeholder="405-143-9334">
+            
+            <label>I want to receive marketing emails.</label>
+            <input type="checkbox" name="marketing"> 
+
+            <p>The kind of DJ you are: </p> <p></p>
+            X  <input type="radio" name="job" value="1"> 
+            Y  <input type="radio" name="job" value="2">
+            Z  <input type="radio" name="job" value="3"> 
+
+            <label style="margin-top: 10px;">Date</label>
+            <input style="margin: auto; margin-top: 10px;" type="date" name="date">
+
+            <input style="margin-top: 10px;" type="submit" value="Submit" id="submit">
+        </form>
+    </body>
+</html>

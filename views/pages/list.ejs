@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Main</title>
+
+        <link href="../../static/css/main.css" rel="stylesheet">
+    </head>
+    
+    <body>
+        <main>
+            <header>
+                <section class="header-tool">
+                    <button><a href="/">Main</a></button>
+                </section>
+
+                <%- include('../partials/date-time'); %>
+            </header>
+            <hr>
+
+            <section>
+                <% if(playlists.length == 0) { %>
+                    <h1>None exist for this search.</h1>
+                <% } %>
+
+                <% playlists.forEach(playlist => { %>
+                    <h1> <%= playlist.name %> [<%= playlist.time %>] [<%= playlist.size %>] </h1>
+                    <hr>
+                    <ul class="record-list">
+                        <% playlist.records.forEach(record => { %>
+                        <li>
+                            <p> <%= record.name %> </p>
+                            <p> <%= record.info %> </p>
+                            <p> <%= record.time %> </p>
+                        </li>
+                        <% }); %>
+                    </ul>
+                    <hr>
+                <% }); %>
+            </section>
+        </main>
+    </body>
+</html>

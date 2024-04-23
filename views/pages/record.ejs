@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Records</title>
+
+        <link href="/../../static/css/main.css" rel="stylesheet">
+    </head>
+    
+    <body>
+        <main>
+            <header>
+                <section class="header-tool">
+                    <button><a href="/">Main</a></button>
+                </section>
+
+                <%- include('../partials/date-time'); %>
+            </header>
+            <hr>
+
+            <section>
+                
+                <% if(records.length == 0) { %>
+                    <h1>None exist for this search.</h1>
+                <% } %>
+
+                <ul class="records">
+                    <% records.forEach(record => { %>
+                        <li>
+                            <p> <%= record.name %> </p>
+                            <p> <%= record.info %> </p>
+                            <p> <%= record.time %> </p>
+
+                            <% const matches = list.records.filter(listrecord => listrecord.recid === record.id) %>
+                            <% if (matches.length > 0) { %>
+                            <% } else { %>
+                                <form method="post" action="/list/add/finish">                            
+                                    <input type="hidden" name="listID" value="<%= list.id %>">
+                                    <input type="hidden" name="recoID" value="<%= record.id %>">
+                                    <button type="submit">+</button>
+                                </form>
+                            <% } %>
+                        </li>
+                    <% }); %>
+                </ul>
+                <hr>
+            </section>
+        </main>
+    </body>
+</html>

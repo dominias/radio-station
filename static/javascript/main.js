@@ -38,66 +38,6 @@ document.addEventListener("DOMContentLoaded", function() {
             
         }
     });
-
-    recordData = JSON.parse(listdata);
-
-    playlists = document.getElementById("playlist-list");
-
-    recordData.forEach(playlist => {
-        const listElem = document.createElement("li");
-        const nameElem = document.createElement("p");
-        const timeElem = document.createElement("p");
-        const sizeElem = document.createElement("p");
-        const viewElem = document.createElement("button");
-
-        const nameText = document.createTextNode(playlist.name);
-        const timeText = document.createTextNode(playlist.time);
-        const sizeText = document.createTextNode(playlist.size);
-        const viewText = document.createTextNode("Select");
-
-        nameElem.appendChild(nameText);
-        timeElem.appendChild(timeText);
-        sizeElem.appendChild(sizeText);
-        viewElem.appendChild(viewText);
-
-        listElem.append(nameElem);
-        listElem.append(timeElem);
-        listElem.append(sizeElem);
-        listElem.append(viewElem);
-        
-        viewElem.addEventListener("click", function () {
-            records = document.getElementById("records-list");
-
-            records.innerHTML = "";
-
-            playlist.records.forEach(record => {
-                const listElem = document.createElement("li");
-                const nameElem = document.createElement("p");
-                const infoElem = document.createElement("p");
-                const timeElem = document.createElement("p");
-                const addeElem = document.createElement("button");
-        
-                const nameText = document.createTextNode(record.name);
-                const infoText = document.createTextNode(record.info);
-                const timeText = document.createTextNode(record.time);
-                const addeText = document.createTextNode("+");
-        
-                nameElem.appendChild(nameText);
-                infoElem.appendChild(infoText);
-                timeElem.appendChild(timeText);
-                addeElem.appendChild(addeText);
-        
-                listElem.append(nameElem);
-                listElem.append(infoElem);
-                listElem.append(timeElem);
-                listElem.append(addeElem);
-
-                records.append(listElem);
-            });
-        });
-
-        playlists.append(listElem);
-    });
 });
 
 function vis(id) {
@@ -106,8 +46,7 @@ function vis(id) {
     if (button.style.color != "gray") button.style.color = "gray";
     else button.style.color = "black";
 
-    if (id == "list-vis") var change = document.getElementById("playlists");
-    else if (id == "slot-vis") var change = document.getElementById("timeslots");
+    if (id == "slot-vis") var change = document.getElementById("timeslots");
     else if (id == "date-vis") var change = document.getElementById("weekdates");
 
     if (change.style.display != "none") change.style.display = "none";

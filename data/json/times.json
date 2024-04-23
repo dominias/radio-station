@@ -1,0 +1,157 @@
+[
+    {
+        "id": 1,
+        "week": "WEEK OF 3/31",
+        "dates": [
+            {
+                "number": 1,
+                "timeslots": [
+                    {
+                        "id": 1,
+                        "user": 0,
+                        "list": null,
+                        "name": "Admin",
+                        "time": "6:00 PM",
+                        "open": "CLOSED"
+                    },
+                    {
+                        "id": 2,
+                        "user": null,
+                        "list": null,
+                        "name": "None",
+                        "time": "6:15 PM",
+                        "open": "OPEN"
+                    },
+                    {
+                        "id": 3,
+                        "user": null,
+                        "list": null,
+                        "name": "None",
+                        "time": "6:15 PM",
+                        "open": "Open"
+                    },
+                    {
+                        "id": 4,
+                        "user": null,
+                        "list": null,
+                        "name": "None",
+                        "time": "6:30 PM",
+                        "open": "OPEN"
+                    },
+                    {
+                        "id": 5,
+                        "user": null,
+                        "list": null,
+                        "name": "None",
+                        "time": "6:45 PM",
+                        "open": "OPEN"
+                    },
+                    {
+                        "id": 6,
+                        "user": 2,
+                        "list": null,
+                        "name": "Smith",
+                        "time": "7:00 PM",
+                        "open": "CLOSED"
+                    },
+                    {
+                        "id": 7,
+                        "user": null,
+                        "list": null,
+                        "name": "None",
+                        "time": "7:15 PM",
+                        "open": "OPEN"
+                    },
+                    {
+                        "id": 8,
+                        "user": 1,
+                        "list": null,
+                        "name": "James",
+                        "time": "7:30 PM",
+                        "open": "CLOSED"
+                    },
+                    {
+                        "id": 9,
+                        "user": null,
+                        "list": null,
+                        "name": "None",
+                        "time": "7:45 PM",
+                        "open": "OPEN"
+                    }
+                ]
+            },
+            {
+                "number": 2
+            },
+            {
+                "number": 3
+            },
+            {
+                "number": 4
+            },
+            {
+                "number": 5
+            },
+            {
+                "number": 6
+            },
+            {
+                "number": 7
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "week": "WEEK OF 4/07",
+        "dates": [
+            {
+                "number": 1
+            },
+            {
+                "number": 2
+            },
+            {
+                "number": 3
+            },
+            {
+                "number": 4
+            },
+            {
+                "number": 5
+            },
+            {
+                "number": 6
+            },
+            {
+                "number": 7
+            }
+        ]
+    },
+    {
+        "id": 3,
+        "week": "WEEK OF 4/14",
+        "dates": [
+            {
+                "number": 1
+            },
+            {
+                "number": 2
+            },
+            {
+                "number": 3
+            },
+            {
+                "number": 4
+            },
+            {
+                "number": 5
+            },
+            {
+                "number": 6
+            },
+            {
+                "number": 7
+            }
+        ]
+    }
+]

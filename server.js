@@ -1,20 +1,15 @@
+require('dotenv').config();
+
 const fs = require('fs');
 const path = require('path');
 const express = require('express');
 
-const jsonList = 'list.json';
-const jsonListPath = path.join(__dirname, 'data/json', jsonList);
-const jsonListData = fs.readFileSync(jsonListPath, 'utf8');
-const list = JSON.parse(jsonListData);
-
-const jsonTime = 'time.json';
-const jsonTimePath = path.join(__dirname, 'data/json', jsonTime);
-const jsonTimeData = fs.readFileSync(jsonTimePath, 'utf8');
-const time = JSON.parse(jsonTimeData);
+const User = require('./models/User');
+const List = require('./models/List');
+const Time = require('./models/Time');
+const Record = require('./models/Record');
 
 const app = express();
-
-const jsonMessage = (msg) => { return {message: msg}};
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -26,37 +21,36 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
 app.get('/', function(req, res) {
-    res.render('pages/main',
-    {
-        timeData: time,
-        listData: list
-    });
+    Time.find()
+        .then((tdata) => {
+            List.find()
+                .then((ldata) => {
+                    res.render('pages/main', {
+                        timeData: tdata,
+                        listData: ldata
+                    });
+                })
+                .catch((err) => {
+                    res.json({message: "Unable to connect to List."});
+                });
+        })
+        .catch((err) => {
+            res.json({message: "Unable to connect to Time."});
+        });
 });
 
 app.get('/extra', function(req, res) {
     res.render('pages/extra');
 })
 
-app.get('/list', (req, res) => {
-    res.render('pages/list', { playlists: list });
-});
+const listRouter = require('./handlers/listRouter.js');
+listRouter.handleLists(app, List, Record);
+listRouter.handleListName(app, List, Record);
+listRouter.handleListEdit(app, List);
+listRouter.handleRecordSelect(app, List, Record);
 
-app.get('/list/single/:listName', (req, res) => {
-    const nameToFind = req.params.listName.toLowerCase();
+require('./handlers/dataHandler.js').connect();
 
-    const matches = list.filter(playlist => nameToFind === playlist.name.toLowerCase());
+const port = process.env.port;
 
-    res.render('pages/list', { playlists: matches });
-});
-
-app.get('/list/search/:listSubstring', (req, res) => {
-    const nameToFind = req.params.listSubstring.toLowerCase();
-
-    const matches = list.filter(playlist => playlist.name.toLowerCase().includes(nameToFind));
-
-    res.render('pages/list', { playlists: matches });
-});
-
-app.listen(8080);
-
-console.log("The server is listening on port 8080.");
+app.listen(port, () => { console.log(`The server is running at port number ${port}.`); });

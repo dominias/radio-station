@@ -174,56 +174,30 @@ li { font-size: medium; }
     border-radius: 15px;
 }
 
-.playlists-and-records {
-    display: grid;
-    grid-template-columns: 25% 60%;
-
-    justify-content: center;
-}
-
-.playlists {
+.records section {
     border: 1px solid black;
-    
 }
 
-.playlist-list {
-    line-height: 5px;
-}
-
-.playlist-list li {
-    display: grid;
-    grid-template-columns: 45% 20% 10% 20% 5%;
-
-    margin-left: -30px;
-}
-
-.playlist-list li:nth-child(odd) {
-    background-color: rgb(243, 243, 243)
-}
-
-.records {
-    border: 1px solid black;
-    
-}
-
-.record-list {
+.records ul {
     list-style-type: none;
     line-height: 5px;
 }
 
-.record-list li {
+.records li {
     display: grid;
     grid-template-columns: 15% 65% 10% 10%;
+
+    align-items: center;
 
     margin-left: -30px;
 }
 
-.record-list li:nth-child(odd) {
+.records li:nth-child(odd) {
     background-color: rgb(243, 243, 243)
 }
 
-.record-list button {
+.records button {
     border-radius: 25px;
-
+    text-align: center;
     margin: auto;
 }

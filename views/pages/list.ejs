@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Main</title>
+        <title>Lists</title>
 
         <link href="../../static/css/main.css" rel="stylesheet">
     </head>
@@ -18,19 +18,23 @@
             <hr>
 
             <section>
-                <% if(playlists.length == 0) { %>
+                <% if(lists.length == 0) { %>
                     <h1>None exist for this search.</h1>
                 <% } %>
 
-                <% playlists.forEach(playlist => { %>
-                    <h1> <%= playlist.name %> [<%= playlist.time %>] [<%= playlist.size %>] </h1>
+                <% lists.forEach(list => { %>
+                    <h1> <%= list.name %> [<%= list.size %>] <button onClick="location.href='/list/add/record/<%= list.id %>'" type="button">+</button></h1>
                     <hr>
-                    <ul class="record-list">
-                        <% playlist.records.forEach(record => { %>
+                    <ul class="records">
+                        <% list.records.forEach(listrecord => { %>
                         <li>
-                            <p> <%= record.name %> </p>
-                            <p> <%= record.info %> </p>
-                            <p> <%= record.time %> </p>
+                            <% records.forEach(record => { %>
+                                <% if (record.id === listrecord.recid) { %>
+                                    <p> <%= record.name %> </p>
+                                    <p> <%= record.info %> </p>
+                                    <p> <%= record.time %> </p>
+                                <% } %>
+                            <% }); %>
                         </li>
                         <% }); %>
                     </ul>

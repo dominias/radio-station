@@ -18,9 +18,11 @@ const getSongsFromPlaylist = (app) => {
 	app.get("/api/timeslot/:id", (req, resp) => {
 		const idToFind = req.params.id;
 		const foundTimeslot = timeslotDB.getData().find((timeslot) => timeslot.id === idToFind);
-		resp.render("partials/playlistSongs.ejs", {
-			playlist: foundTimeslot.songs,
-		});
+		if (foundTimeslot !== undefined) {
+			resp.render("partials/playlistSongs.ejs", {
+				playlist: foundTimeslot.songs,
+			});
+		}
 	});
 };
 

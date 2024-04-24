@@ -4,7 +4,8 @@
 	"description": "swe 432 project",
 	"main": "index.js",
 	"scripts": {
-		"dev": "nodemon --ext js,css,ejs --ignore public app.js"
+		"dev": "nodemon --ext js,css,ejs --ignore public app.js",
+		"mongo": "brew services start mongodb-community"
 	},
 	"author": "",
 	"license": "ISC",

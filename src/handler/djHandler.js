@@ -1,20 +1,25 @@
-// return all DJs
-// const djs = require("./schemas/djSchema");
-const getDJs = () => {
-	// get data from mongodb djs collection
-	djs.find()
+const djs = require("./schemas/djSchema"); // dj collection database
+
+// Retrieves all DJ names from database
+const getDJs = async () => {
+	let djNames = [];
+	await djs
+		.find()
 		.then((data) => {
-			console.log(data);
+			data.forEach((dj) => {
+				djNames.push(dj.name);
+			});
+			djNames = djNames.sort();
 		})
 		.catch((err) => {
-			console.log("unable to connect to djs");
+			console.log(err);
 		});
-	// return djs.sort();
+	return djNames;
 };
 
-const handleGetDJList = (app) => {
-	app.get("/api/getDJList", (req, resp) => {
-		resp.json(getDJs());
+const handleGetDJList = async (app) => {
+	app.get("/api/getDJList", async (_, resp) => {
+		resp.json(await getDJs());
 	});
 };
 

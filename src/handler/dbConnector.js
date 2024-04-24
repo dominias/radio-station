@@ -3,8 +3,6 @@ const mongoose = require("mongoose");
 
 const connect = () => {
 	const opt = {
-		useUnifiedTopology: true,
-		useNewUrlParser: true,
 		dbName: "radio-station",
 	};
 	console.log("starting to connect to mongo ...");

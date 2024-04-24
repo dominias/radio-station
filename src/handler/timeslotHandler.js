@@ -1,4 +1,4 @@
-const timeslotDB = require("./data/timeslotDB");
+const timeslotDB = require("./schemas/timeslotDB");
 
 const getTimeslot = (app) => {
 	app.get("/api/getTimeslot/:id", (req, resp) => {

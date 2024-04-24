@@ -10,8 +10,10 @@
 	"license": "ISC",
 	"dependencies": {
 		"connect-livereload": "^0.6.1",
+		"dotenv": "^16.4.5",
 		"ejs": "^3.1.9",
 		"express": "^4.19.2",
-		"livereload": "^0.9.3"
+		"livereload": "^0.9.3",
+		"mongoose": "^8.3.2"
 	}
 }

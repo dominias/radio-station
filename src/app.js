@@ -2,7 +2,10 @@ const path = require("path");
 const express = require("express");
 const app = express();
 const hostname = "localhost";
-const port = 8080;
+require("dotenv").config();
+const port = process.env.port;
+// create connection to database
+require("./handler/dbConnector.js").connect();
 
 const livereload = require("livereload");
 const connectLivereload = require("connect-livereload");

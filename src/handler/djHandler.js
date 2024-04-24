@@ -1,8 +1,15 @@
 // return all DJs
-const djs = require("./data/djs.json");
+// const djs = require("./schemas/djSchema");
 const getDJs = () => {
-	// get data from company provider
-	return djs.sort();
+	// get data from mongodb djs collection
+	djs.find()
+		.then((data) => {
+			console.log(data);
+		})
+		.catch((err) => {
+			console.log("unable to connect to djs");
+		});
+	// return djs.sort();
 };
 
 const handleGetDJList = (app) => {

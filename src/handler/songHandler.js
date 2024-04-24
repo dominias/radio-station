@@ -1,6 +1,6 @@
 // return all DJs
-const songs = require("./data/songs.json");
-const timeslotDB = require("./data/timeslotDB");
+const songs = require("./schemas/songs.json");
+const timeslotDB = require("./schemas/timeslotDB");
 const { getTimeslot } = require("./timeslotHandler");
 
 // Initial Fetch

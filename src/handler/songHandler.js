@@ -1,12 +1,25 @@
-const songs = require("./schemas/songs.json");
+const songsCollection = require("./schemas/songSchema"); // songs collection database
 const timeslotDB = require("./schemas/timeslotDB");
 
 // Initial Fetch
-const initSongs = () => {
-	// get data from company provider
-	songs.sort(songComparison);
+const initSongs = async () => {
+	let songs = [];
+	await songsCollection
+		.find()
+		.then((data) => {
+			songs = data;
+		})
+		.catch((err) => {
+			console.log(err);
+		});
+	// remove ' from songs
 	songs.forEach((song, i) => {
-		songs[i] = { title: song.title.replace(new RegExp("'", "g"), ""), artist: song.artist.replace(new RegExp("'", "g"), "") };
+		songs[i] = {
+			id: song.id,
+			title: song.title.replace(new RegExp("'", "g"), ""),
+			artist: song.artist.replace(new RegExp("'", "g"), ""),
+			duration: song.duration,
+		};
 	});
 	return songs.sort(songComparison);
 };
@@ -39,7 +52,7 @@ const querySongList = (app) => {
 
 const addSongToPlaylist = (app) => {
 	app.post("/api/timeslot/:id/addSong", (req, resp) => {
-		const newSong = { title: req.query.title, artist: req.query.artist };
+		const newSong = req.body;
 		const idToFind = req.params.id;
 		const foundTimeslot = timeslotDB.getData().find((timeslot) => timeslot.id === idToFind);
 		// If song already in playlist

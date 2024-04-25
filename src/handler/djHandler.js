@@ -1,9 +1,9 @@
-const djs = require("./schemas/djSchema"); // dj collection database
+const djsCollection = require("./schemas/djSchema"); // dj collection database
 
 // Retrieves all DJ names from database
 const getDJs = async () => {
 	let djNames = [];
-	await djs
+	await djsCollection
 		.find()
 		.then((data) => {
 			data.forEach((dj) => {

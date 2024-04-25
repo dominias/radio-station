@@ -1,6 +1,6 @@
 <% songs.forEach(song=> { %>
     <div class="song"
-        onclick="addSong('<%=song.title%>', '<%=song.artist%>')"
+        onclick="addSong('<%=song.id%>','<%=song.title%>', '<%=song.artist%>', '<%=song.duration%>')"
         data-id="<%=song.title+song.artist%>">
         <div class="song-icon">
             <%=
@@ -14,13 +14,26 @@
                 <%= song.artist%>
             </div>
         </div>
+        <div class="song-duration">
+            <%=song.duration%>
+        </div>
     </div>
     <% }) %>
 
         <script>
-            async function addSong(title, artist) {
+            async function addSong(id, title, artist, duration) {
+                const song = {
+                    id: parseInt(id),
+                    title: title,
+                    artist: artist,
+                    duration: duration
+                }
                 const timeslotId = window.SongModal.timeslot.id;
-                await fetch(`/api/timeslot/${timeslotId}/addSong?title=${title}&artist=${artist}`, { method: "POST" }).then((response) => response.text())
+                await fetch(`/api/timeslot/${timeslotId}/addSong`, {
+                    method: "POST", headers: {
+                        "Content-Type": "application/json"
+                    }, body: JSON.stringify(song)
+                }).then((response) => response.text())
                     .then((html) => {
                         document.querySelector(".timeslot-playlist-songs").innerHTML = html + `                                    <button
                                             class="add-song-button"

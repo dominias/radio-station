@@ -213,3 +213,15 @@ li:hover {
 	font-size: small;
 	color: var(--grey);
 }
+
+.song-duration {
+	margin-left: auto;
+	margin-right: 5%;
+	font-weight: bold;
+	color: var(--purple);
+	transition: all 0.25s ease-in-out;
+}
+
+.song:hover .song-duration {
+	color: var(--white);
+}

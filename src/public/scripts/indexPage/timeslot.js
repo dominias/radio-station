@@ -38,8 +38,18 @@ class Day {
 		elem.appendChild(timeslotContainer);
 		// Append timeslots to day
 
-		this.times.forEach((time, i) => {
+		this.times.forEach(async (time, i) => {
 			this.timeslots.push(new Timeslot(this.date, time));
+			// Retrieve timeslot data from DB
+			await fetch(`/api/getTimeslot/${this.timeslots[i].id}`)
+				.then((response) => {
+					return response.json();
+				})
+				.then((timeslot) => {
+					if (timeslot !== null) {
+						console.log(timeslot);
+					}
+				});
 			timeslotContainer.appendChild(this.timeslots[i].render());
 		});
 
@@ -53,10 +63,11 @@ class Timeslot {
 		this.id = day + time;
 		this.day = day;
 		this.time = time;
+		this.DJid = null;
 		this.DJ = null;
+		this.taken = false;
 		this.songs = [];
 		this.element = null;
-		this.taken = false;
 	}
 
 	// set DJ object for timeslot from the assignDJ class to indicate that the timeslot is now taken by the DJ

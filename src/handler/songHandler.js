@@ -1,5 +1,5 @@
 const songsCollection = require("./schemas/songSchema"); // songs collection database
-const timeslotDB = require("./schemas/timeslotDB");
+const timeslotsModel = require("./schemas/timeslotSchema"); // dj collection database
 
 // Initial Fetch
 const initSongs = async () => {
@@ -27,13 +27,13 @@ const initSongs = async () => {
 // for later use when fetching again from DB of timeslot
 const getSongsFromPlaylist = (app) => {
 	app.get("/api/timeslot/:id", (req, resp) => {
-		const idToFind = req.params.id;
-		const foundTimeslot = timeslotDB.getData().find((timeslot) => timeslot.id === idToFind);
-		if (foundTimeslot !== undefined) {
-			resp.render("partials/playlistSongs.ejs", {
-				playlist: foundTimeslot.songs,
-			});
-		}
+		timeslotsModel.findOne({ id: req.params.id }).then((data) => {
+			if (data !== null) {
+				resp.render("partials/playlistSongs.ejs", {
+					playlist: data.songs,
+				});
+			}
+		});
 	});
 };
 

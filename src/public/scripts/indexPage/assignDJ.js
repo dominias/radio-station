@@ -1,5 +1,6 @@
 class DJ {
-	constructor(name, elem) {
+	constructor(id, name, elem) {
+		this.id = id;
 		this.name = name;
 		this.elem = elem;
 		const iconNode = document.querySelector(".assigndj-overview-section .icon");
@@ -25,8 +26,8 @@ class DJ {
 		const currentDJ = await fetch(`/api/getTimeslot/${timeslot.id}`).then((response) => {
 			return response.json();
 		});
+		// If no dj in timeslot, create timeslot and assign w dj
 		if (currentDJ === null) {
-			// create new timeslot and add to "DB" IMPORTANT!!!!
 			await fetch("/api/createTimeslot", {
 				method: "POST",
 				headers: {
@@ -36,12 +37,14 @@ class DJ {
 					id: timeslot.day + timeslot.time,
 					day: timeslot.day,
 					time: timeslot.time,
+					DJid: newDJ.id,
 					DJ: newDJ.name,
+					taken: true,
 					songs: [],
 				}),
 			});
 		}
-		// timeslot exists, just update the DJ
+		// timeslot exists, just update the timeslot document with new dj
 		else {
 			await fetch("/api/updateTimeslot", {
 				method: "PUT",
@@ -50,10 +53,8 @@ class DJ {
 				},
 				body: JSON.stringify({
 					id: timeslot.day + timeslot.time,
-					day: timeslot.day,
-					time: timeslot.time,
+					DJid: newDJ.id,
 					DJ: newDJ.name,
-					songs: timeslot.songs,
 				}),
 			});
 		}
@@ -74,12 +75,10 @@ class DJModal {
 	fetchDJList = async () => {
 		const resp = await fetch("/api/getDJList");
 		const data = await resp.json();
-		let DJList = [];
-		data.forEach((DJname) => {
-			const DJobject = new DJ(DJname, document.querySelector(`[data-name=${DJname}]`));
-			DJList.push(DJobject);
+		this.DJs = [];
+		data.forEach((dj) => {
+			this.DJs.push(new DJ(dj.id, dj.name, document.querySelector(`[data-id='${dj.id}']`)));
 		});
-		this.DJs = DJList;
 	};
 	openAssignDJModal(timeslot) {
 		// Set the DJmodal for the timeslot

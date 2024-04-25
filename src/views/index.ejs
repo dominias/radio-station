@@ -97,8 +97,8 @@ background-image: linear-gradient(to top, #2b2830 0%, #242424 74%);
                     <div class="dj-list">
                         <%djs.forEach(dj=> {%>
                             <div class="dj"
-                                data-name="<%= dj%>">
-                                <%=dj%>
+                                data-id=<%=dj.id%>>
+                                <%=dj.name%>
                             </div>
                             <%}); %>
                     </div>

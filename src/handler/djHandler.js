@@ -2,19 +2,26 @@ const djsCollection = require("./schemas/djSchema"); // dj collection database
 
 // Retrieves all DJ names from database
 const getDJs = async () => {
-	let djNames = [];
+	let djs = [];
 	await djsCollection
 		.find()
 		.then((data) => {
 			data.forEach((dj) => {
-				djNames.push(dj.name);
+				djs.push(dj);
 			});
-			djNames = djNames.sort();
+			djs = djs.sort((a, b) => {
+				if (a.name.toLowerCase() < b.name.toLowerCase()) {
+					return -1;
+				} else if (a.name.toLowerCase() > b.name.toLowerCase()) {
+					return 1;
+				}
+				return 0;
+			});
 		})
 		.catch((err) => {
 			console.log(err);
 		});
-	return djNames;
+	return djs;
 };
 
 const handleGetDJList = async (app) => {

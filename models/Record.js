@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const recordSchema = new mongoose.Schema({
     id: Number,
     name: String,
-    info: String,
+    artist: String,
     time: String
 }); 
 

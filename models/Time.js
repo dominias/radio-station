@@ -13,7 +13,7 @@ const timeSchema = new mongoose.Schema({
                     list: Number,
                     name: String,
                     time: String,
-                    open: String
+                    taken: Boolean
                 }
             ]
         }

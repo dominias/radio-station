@@ -2,9 +2,11 @@ document.addEventListener("DOMContentLoaded", function() {
     tempTimeslot = JSON.parse(timedata);
     timeslotData = tempTimeslot[0];
 
-    var week = document.querySelector(".week-option");
-    var next = document.querySelector(".next-week");
-    var last = document.querySelector(".last-week");
+    listData = JSON.parse(listdata);
+
+    let week = document.querySelector(".week-option");
+    let next = document.querySelector(".next-week");
+    let last = document.querySelector(".last-week");
     week.innerHTML = timeslotData.week;
 
     populate();
@@ -17,11 +19,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
             populate();
         }
-
-        else {
-            console.log("Cannot go any further in the future.");
-            
-        }
     });
     
     last.addEventListener("click", function () {
@@ -32,25 +29,17 @@ document.addEventListener("DOMContentLoaded", function() {
 
             populate();
         }
-
-        else {
-            console.log("Cannot go any further in the past.");
-            
-        }
     });
 });
 
 function vis(id) {
-    var button = document.getElementById(id);
+    let button = document.getElementById(id);
 
-    if (button.style.color != "gray") button.style.color = "gray";
-    else button.style.color = "black";
+    button.style.color = (button.style.color != "gray") ? "gray" : "black";
 
-    if (id == "slot-vis") var change = document.getElementById("timeslots");
-    else if (id == "date-vis") var change = document.getElementById("weekdates");
+    let change = (id == "slot-vis") ? document.getElementById("timeslots") : document.getElementById("weekdates");
 
-    if (change.style.display != "none") change.style.display = "none";
-    else change.style.display = "grid";
+    change.style.display = (change.style.display != "none") ? "none" : "grid";
  }
 
  function populate() {
@@ -70,7 +59,7 @@ function vis(id) {
                 const text = document.createTextNode(timeslot.time);
                 const elem = document.createElement("button");
 
-                if (timeslot.open == "Closed") elem.setAttribute("class", "timeslot-closed");
+                if (timeslot.taken) elem.setAttribute("class", "timeslot-closed");
                 else elem.setAttribute("class", "timeslot")
                 
                 elem.setAttribute("id", timeslot.id);
@@ -87,9 +76,23 @@ function vis(id) {
                     document.getElementById("slot-time").innerText = timeslot.time;
 
                     open = document.getElementById("slot-open");
-                    open.innerText = timeslot.open;
+                    open.innerText = (!timeslot.taken) ? "OPEN" : "TAKEN";
                     
-                    if (timeslot.open == "Closed") open.style.backgroundColor = "red";
+                    open.style.backgroundColor = (!timeslot.taken) ? "#47EBB4" : "red";
+                    
+                    let listButton = document.getElementById("slot-list");
+
+                    if (timeslot.taken) {
+                        listButton.style.visibility = "visible";
+                        
+                        list = listData.find(list => list.id == timeslot.list);
+                        
+                        listButton.innerText = list.name;
+
+                        listButton.addEventListener("click", function() { window.location.href = "./list/single/" + list.name; });
+                    }
+
+                    else { listButton.style.visibility = "hidden"; }
                 });
             });
         });

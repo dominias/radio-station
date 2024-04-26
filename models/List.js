@@ -4,7 +4,6 @@ const listSchema = new mongoose.Schema({
     id: Number,
     user: Number,
     name: String,
-    size: Number,
     records: [{recid: Number}]
 }); 
 

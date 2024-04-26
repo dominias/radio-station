@@ -1,6 +1,5 @@
 require('dotenv').config();
 
-const fs = require('fs');
 const path = require('path');
 const express = require('express');
 
@@ -25,17 +24,31 @@ app.get('/', function(req, res) {
         .then((tdata) => {
             List.find()
                 .then((ldata) => {
-                    res.render('pages/main', {
-                        timeData: tdata,
-                        listData: ldata
-                    });
+                    Record.find()
+                        .then((rdata) => {
+                            User.find()
+                                .then((udata) => {
+                                    res.render('pages/main', {
+                                        timeData: tdata,
+                                        listData: ldata,
+                                        recoData: rdata,
+                                        userData: udata
+                                    });
+                                })
+                                .catch((err) => {
+                                    res.json({ message: "Unable to connect to User."});
+                                });
+                        })
+                        .catch((err) => {
+                            res.json({ message: "Unable to connect to Record." });
+                        });
                 })
                 .catch((err) => {
-                    res.json({message: "Unable to connect to List."});
+                    res.json({ message: "Unable to connect to List." });
                 });
         })
         .catch((err) => {
-            res.json({message: "Unable to connect to Time."});
+            res.json({ message: "Unable to connect to Time." });
         });
 });
 

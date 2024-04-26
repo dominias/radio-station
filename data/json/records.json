@@ -2,25 +2,31 @@
     {
         "id": 0,
         "name": "Halfeti",
-        "info": "This song's title refers to Halfeti, a place in Turkey.",
+        "artist": "45",
         "time": "1:34"
     },
     {
         "id": 1,
         "name": "Song 2",
-        "info": "N/A",
+        "artist": "N/A",
         "time": "1:01"
     },
     {
         "id": 2,
         "name": "Serpent Horizon",
-        "info": "This song is a hardcore rock song with unique instruments.",
+        "artist": "Linked Horizon",
         "time": "6:01"
     },
     {
         "id": 3,
         "name": "Song 4",
-        "info": "N/A",
+        "artist": "N/A",
         "time": "0:43"
+    },
+    {
+        "id": 4,
+        "name": "Patchwork Chimera",
+        "artist": "45",
+        "time": "6:31"
     }
 ]

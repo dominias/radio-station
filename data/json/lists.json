@@ -3,7 +3,6 @@
         "id": 0,
         "user": 0,
         "name": "Electric",
-        "size": 4,
         "records": [
             {
                 "recid": 1
@@ -15,9 +14,8 @@
     },
     {
         "id": 1,
-        "user": 1,
+        "user": 2,
         "name": "Instrumental",
-        "size": 3,
         "records": [
             {
                 "recid": 0
@@ -31,7 +29,6 @@
         "id": 2,
         "user": 0,
         "name": "Rock",
-        "size": 1,
         "records": [
             {
                 "recid": 0
@@ -51,7 +48,6 @@
         "id": 3,
         "user": 1,
         "name": "James",
-        "size": 2,
         "records": [
             {
                 "recid": 3

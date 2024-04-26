@@ -19,20 +19,25 @@
 
             <section>
                 <% if(lists.length == 0) { %>
-                    <h1>None exist for this search.</h1>
+                    <h3 style="text-align: center;">None exist for this search.</h3>
                 <% } %>
 
                 <% lists.forEach(list => { %>
-                    <h1> <%= list.name %> [<%= list.size %>] <button onClick="location.href='/list/add/record/<%= list.id %>'" type="button">+</button></h1>
+                    <h3> <%= list.name %> <button onClick="location.href='/list/add/record/<%= list.id %>'" type="button">+</button></h3>
                     <hr>
                     <ul class="records">
+                        <li>
+                            <p><b> Name    </b></p>
+                            <p><b> Creator </b></p>
+                            <p><b> Length  </b></p>
+                        </li>
                         <% list.records.forEach(listrecord => { %>
                         <li>
                             <% records.forEach(record => { %>
                                 <% if (record.id === listrecord.recid) { %>
-                                    <p> <%= record.name %> </p>
-                                    <p> <%= record.info %> </p>
-                                    <p> <%= record.time %> </p>
+                                    <p> <%= record.name %>   </p>
+                                    <p> <%= record.artist %> </p>
+                                    <p> <%= record.time %>   </p>
                                 <% } %>
                             <% }); %>
                         </li>

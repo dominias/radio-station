@@ -41,13 +41,13 @@ const handleListName = (app, List, Record) => {
 };
 
 const handleListEdit = (app, List) => {
-    app.route("/list/add/finish").post( (req, res) => {
+    app.post("/list/add/finish", (req, res) => {
             List.findOneAndUpdate(
                 {id: req.body.listID},
                 {$push: { records: {recid: req.body.recoID} }},
                 {new: true})
                 .then((data) => {
-                    res.json(data);
+                    res.redirect(`/list/add/record/${req.body.listID}`);
                 })
                 .catch((err) => {
                     res.json({ message: "Unable to update the list."});

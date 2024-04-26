@@ -1,10 +1,10 @@
 const mongoose = require("mongoose");
-const timeslotsModel = require("./schemas/timeslotSchema"); // dj collection database
+const timesModel = require("./schemas/timeSchema"); // dj collection database
 
-// get one timeslot based on id
+// get one timeslot based on day id
 const getTimeslot = (app) => {
 	app.get("/api/getTimeslot/:id", (req, resp) => {
-		timeslotsModel.findOne({ id: req.params.id }).then((data) => {
+		timesModel.findOne({ dates: { $elemMatch: { id: req.params.id } } }).then((data) => {
 			if (data == null) {
 				resp.json(null);
 			} else {
@@ -17,21 +17,23 @@ const getTimeslot = (app) => {
 // Updates timeslot to req.body
 const updateTimeslot = async (app) => {
 	app.put("/api/updateTimeslot", async (req, resp) => {
-		await timeslotsModel.findOneAndUpdate(
-			{ id: req.body.id },
-			{ dj: req.body.dj },
-			{ new: true }
-		);
+		await timesModel.findOneAndUpdate({ id: req.body.id }, { dj: req.body.dj }, { new: true });
 		resp.json("Successful");
 	});
 };
 
 const handleCreateTimeslot = async (app) => {
 	app.post("/api/createTimeslot", async (req, resp) => {
-		await timeslotsModel(req.body).save();
+		await timesModel(req.body).save();
 		resp.json("Successful");
 	});
 };
+
+// const createTimes = async (app) => {
+// 	app.post("/api/createTimes", async (req, resp) => {
+
+// 	})
+// }
 
 module.exports = {
 	getTimeslot,

@@ -77,17 +77,14 @@ const addSongToPlaylist = (app) => {
 	});
 };
 
-const removeSongToPlaylist = (app) => {
+const removeSongFromPlaylist = (app) => {
 	app.delete("/api/timeslot/:id/deleteSong", async (req, resp) => {
 		const doc = await timeslotsModel.findOneAndUpdate(
 			{ id: req.params.id },
 			{ $pull: { songs: { id: req.query.id } } },
 			{ new: true }
 		);
-		console.log(doc.songs);
-		resp.render("partials/playlistSongs.ejs", {
-			playlist: doc.songs,
-		});
+		resp.json(doc.songs);
 	});
 };
 
@@ -96,5 +93,5 @@ module.exports = {
 	getSongsFromPlaylist,
 	querySongList,
 	addSongToPlaylist,
-	removeSongToPlaylist,
+	removeSongFromPlaylist,
 };

@@ -15,9 +15,9 @@ class DJ {
 		});
 	}
 	updateClickListener(timeslot) {
-		this.elem.addEventListener("click", this.assignDJ);
 		this.elem.timeslot = timeslot;
 		this.elem.DJ = this;
+		this.elem.addEventListener("click", this.assignDJ);
 	}
 
 	// Creates new timeslot instance in DB and assigns DJ to it. If timeslot instance already there, just update instead

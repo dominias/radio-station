@@ -1,4 +1,4 @@
-export default async function renderSongElements(playlistElement, timeslot) {
+export async function renderSongElements(playlistElement, timeslot) {
 	await fetch(`/api/timeslot/${timeslot.id}`)
 		.then((response) => response.json())
 		.then((songs) => {
@@ -23,4 +23,14 @@ export default async function renderSongElements(playlistElement, timeslot) {
 				}
 			});
 		});
+}
+
+export async function removeSongElements(playlistElement, timeslot) {
+	timeslot.songs.forEach((song) => {
+		const songElem = playlistElement.querySelector(
+			`[data-songid='${song.id}']`
+		);
+		console.log(playlistElement, song);
+		playlistElement.removeChild(songElem);
+	});
 }

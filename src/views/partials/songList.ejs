@@ -31,7 +31,7 @@
 
                 render(timeslotId) {
                     const songDiv = document.createElement("li");
-                    songDiv.dataset.id = this.id
+                    songDiv.dataset.songid = this.id
                     songDiv.textContent = `${this.title} - ${this.artist} - ${this.duration}`
                     this.elem = songDiv;
                     // check if timeslotId provided so we can add delete capabilities
@@ -40,11 +40,17 @@
                             await fetch(
                                 `/api/timeslot/${timeslotId}/deleteSong?id=${this.id}`,
                                 { method: "DELETE" }
-                            )
-                                .then(() => {
-                                    document.querySelector(
-                                        ".song-playlist-songs"
-                                    ).removeChild(this.elem)
+                            ).then(response => response.json())
+                                .then((songs) => {
+                                    const songModalPlaylist = document.querySelector(".song-playlist-songs");
+                                    const timeslotModalPlaylist = document.querySelector(".timeslot-playlist-songs");
+
+                                    songModalPlaylist.removeChild(songModalPlaylist.querySelector(`[data-songid='${this.id}']`))
+                                    timeslotModalPlaylist.removeChild(timeslotModalPlaylist.querySelector(`[data-songid='${this.id}']`))
+                                    console.log("remove", songs);
+                                    window.SongModal.timeslot.songs = songs;
+                                    window.TimeslotModal.timeslot.songs = songs;
+
                                 })
                         });
                     }
@@ -64,34 +70,15 @@
                     method: "POST", headers: {
                         "Content-Type": "application/json"
                     }, body: JSON.stringify(song)
-                }).then(() => {
-                    const playlistElement = document.querySelector(".song-playlist-songs").appendChild(new Song(song).render(timeslotId));
+                }).then(response => response.json()).then((songs) => {
+                    const newSong = new Song(song);
+                    document.querySelector(".song-playlist-songs").appendChild(newSong.render(timeslotId));
+                    document.querySelector(".timeslot-playlist-songs").insertBefore(
+                        newSong.render(null),
+                        document.querySelector(".add-song-button")
+                    );
+                    window.SongModal.timeslot.songs = songs;
+                    window.TimeslotModal.songs = songs;
                 });
-                // document.querySelector(".timeslot-playlist-songs").innerHTML = html + `                                    <button
-                //                     class="add-song-button"
-                //                     onclick="window.TimeslotModal.handleAddSongClick(event)">+
-                //                     add
-                //                     song</button>`;
-
-                // // add song delete click event to playlist songs
-                // document.querySelector(".song-playlist-songs")
-                //     .childNodes.forEach((song) => {
-                // song.addEventListener("click", async () => {
-                //     await fetch(
-                //         `/api/timeslot/${timeslotId}/deleteSong?id=${song.dataset.id}`,
-                //         { method: "DELETE" }
-                //     )
-                //         .then((response) => {
-                //             return response.text();
-                //         })
-                //         .then((html) => {
-                //             console.log(html);
-                //             document.querySelector(
-                //                 ".song-playlist-songs"
-                //             ).innerHTML = html;
-                //         });
-                // });
-                //     });
-
             }
         </script>

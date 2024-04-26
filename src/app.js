@@ -45,7 +45,7 @@ timeslotHandler.handleCreateTimeslot(app);
 songHandler.getSongsFromPlaylist(app);
 songHandler.querySongList(app);
 songHandler.addSongToPlaylist(app);
-songHandler.removeSongToPlaylist(app);
+songHandler.removeSongFromPlaylist(app);
 
 // for anything else, display 404 errors
 app.use((req, resp) => {

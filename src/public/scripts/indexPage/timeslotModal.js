@@ -1,18 +1,28 @@
-import renderSongElements from "../../util/renderUtil.js";
-
+import {
+	renderSongElements,
+	removeSongElements,
+} from "../../util/renderUtil.js";
 class TimeslotModal {
 	constructor() {
 		this.timeslot = null; // window shows current timeslot
 	}
 
 	// when opening timeslot modal, need to update the profile icon and name
-	async openTimeSlotModal(timeslot) {
+	openTimeSlotModal(timeslot) {
+		// if different timeslot, rerender
+		if (this.timeslot !== timeslot) {
+			const timeslotModalPlaylist = document.querySelector(
+				".timeslot-playlist-songs"
+			);
+			if (this.timeslot !== null) {
+				console.log("prev:", this.timeslot, "\n", "new:", timeslot);
+				// remove prev timeslot songs
+				removeSongElements(timeslotModalPlaylist, this.timeslot);
+			}
+			// render new timeslot songs
+			renderSongElements(timeslotModalPlaylist, timeslot);
+		}
 		this.timeslot = timeslot;
-		// Used to dynamically update the songs and active DJ on the modal
-		await renderSongElements(
-			document.querySelector(".timeslot-playlist-songs"),
-			timeslot
-		);
 		this.setTimeslotDJ(timeslot.DJ);
 		document.querySelector(".timeslot-modal").style.display = "flex";
 	}
@@ -23,18 +33,6 @@ class TimeslotModal {
 			e.target === document.querySelector(".change-dj") ||
 			e.target === document.querySelector(".add-song-button")
 		) {
-			// remove songs from timeslotmodal
-			const playlistTimeslotModalElement = document.querySelector(
-				".timeslot-playlist-songs"
-			);
-			this.timeslot.songs.forEach((song) => {
-				const songElem = playlistTimeslotModalElement.querySelector(
-					`[data-id='${song.id}']`
-				);
-				if (songElem !== null) {
-					playlistTimeslotModalElement.removeChild(songElem);
-				}
-			});
 			document.querySelector(".timeslot-modal").style.display = "none";
 		}
 	}

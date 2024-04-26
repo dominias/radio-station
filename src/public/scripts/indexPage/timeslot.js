@@ -1,12 +1,11 @@
 class Day {
 	// date Date object, array of times
-	constructor(date, times) {
+	constructor(date, times, dayNumber) {
 		this.date = date;
-		this.dayName = date
-			.toLocaleDateString("en-US", { weekday: "short" })
-			.toUpperCase();
+		this.dayName = date.toLocaleDateString("en-US", { weekday: "short" }).toUpperCase();
 		this.dayMonthString = date.getDate() + "/" + (date.getMonth() + 1);
 		this.times = times;
+		this.dayNumber = dayNumber; // new
 		this.timeslots = []; // holds Timeslot objects
 	}
 
@@ -20,11 +19,7 @@ class Day {
 		dayLabel.className = "day-label";
 
 		const currentDay = new Date();
-		if (
-			this.date.getFullYear() === currentDay.getFullYear() &&
-			this.date.getMonth() === currentDay.getMonth() &&
-			this.date.getDate() === currentDay.getDate()
-		) {
+		if (this.dayNumber === 4) {
 			dayLabel.id = "current";
 		}
 
@@ -42,15 +37,7 @@ class Day {
 		// Append timeslots to day
 
 		this.times.forEach(async (time, i) => {
-			this.timeslots.push(
-				new Timeslot(
-					"" +
-						this.date.getFullYear() +
-						this.date.getMonth() +
-						this.date.getDate(),
-					time
-				)
-			);
+			this.timeslots.push(new Timeslot("" + this.date.getFullYear() + this.date.getMonth() + this.date.getDate(), time));
 			timeslotContainer.appendChild(this.timeslots[i].render());
 			// Retrieve timeslot data from DB
 			await fetch(`/api/getTimeslot/${this.timeslots[i].id}`)
@@ -111,20 +98,20 @@ class Timeslot {
 }
 
 // Renders all of the displayed days from current date
-function renderDaysShown(currentDate, times) {
+function renderDaysShown(currentDate, times, dayNumbers) {
 	let dayElements = [];
 	let containerElement = document.querySelector(".day-container");
 	for (let i = 0; i <= currentDate.getDay(); i++) {
 		let date = new Date(currentDate);
 		date.setDate(currentDate.getDate() - (currentDate.getDay() - i));
-		dayElements.push(new Day(date, times));
+		dayElements.push(new Day(date, times, dayNumbers[i]));
 		containerElement.appendChild(dayElements[i].render());
 	}
 
 	for (let i = currentDate.getDay() + 1; i <= 6; i++) {
 		let date = new Date(currentDate);
 		date.setDate(currentDate.getDate() + (i - currentDate.getDay()));
-		dayElements.push(new Day(date, times));
+		dayElements.push(new Day(date, times, dayNumbers[i]));
 		containerElement.appendChild(dayElements[i].render());
 	}
 
@@ -141,23 +128,62 @@ function updateDaysShown(weekPointer, times) {
 }
 
 // Add times
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
+	const dayNumbers = [0, 1, 2, 3, 4, 5, 6];
 	const times = ["10:00", "11:00", "12:00", "13:00", "14:00", "15:00"];
 
-	let currDate = new Date();
+	let currDate = new Date(2024, 3, 26);
 
 	// Holds all day divs
-	let daysElementsShown = renderDaysShown(currDate, times);
-	// Pointer to indicate which week shown (0 is current week, ++ is next weeks, -- is prev weeks)
-	let weekPointer = 0;
+	let daysElementsShown = renderDaysShown(currDate, times, dayNumbers);
 
-	document.querySelectorAll(".back, .forward").forEach((button) => {
-		button.addEventListener("click", () => {
-			if (button.className === "back") {
-				daysElementsShown = updateDaysShown(--weekPointer, times);
-			} else {
-				daysElementsShown = updateDaysShown(++weekPointer, times);
-			}
+	let listDates = [];
+	daysElementsShown.forEach((date, i) => {
+		let listTimeslots = [];
+
+		listDates.push({
+			number: dayNumbers[i],
+			timeslots,
 		});
+	});
+
+	// // Render database schema
+	// await fetch("/api/createTimes", {
+	// 	method: "POST",
+	// 	headers: {
+	// 		"Content-Type": "application/json",
+	// 	},
+	// 	body: JSON.stringify({
+	// 		id: 0,
+	// 		week: "",
+	// 		time: timeslot.time,
+	// 		dates:
+	// 		dj: {
+	// 			id: newDJ.id,
+	// 			name: newDJ.name,
+	// 		},
+	// 		taken: true,
+	// 		songs: [],
+	// 	}),
+	// });
+	document.querySelector(".logout-button").addEventListener("click", (e) => {
+		document.querySelectorAll(".taken").forEach((elem) => {
+			elem.classList.remove("taken");
+		});
+		daysElementsShown.forEach((day) => {
+			day.timeslots.forEach((timeslot) => {
+				timeslot.id = "";
+				timeslot.day = "";
+				timeslot.time = "";
+				timeslot.DJ = null;
+				timeslot.taken = false;
+				timeslot.songs = [];
+			});
+		});
+		const filler = document.createElement("div");
+		filler.style.width = "319.84px";
+		document.querySelector(".profile").innerHTML = "";
+		document.querySelector(".profile").appendChild(filler);
+		e.stopPropagation();
 	});
 });

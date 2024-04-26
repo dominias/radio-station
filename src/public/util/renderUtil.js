@@ -30,7 +30,6 @@ export async function removeSongElements(playlistElement, timeslot) {
 		const songElem = playlistElement.querySelector(
 			`[data-songid='${song.id}']`
 		);
-		console.log(playlistElement, song);
 		playlistElement.removeChild(songElem);
 	});
 }

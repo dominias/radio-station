@@ -3,8 +3,7 @@
         onclick="addSong('<%=song.id%>','<%=song.title%>', '<%=song.artist%>', '<%=song.duration%>')"
         data-id="<%=song.title+song.artist%>">
         <div class="song-icon">
-            <%=
-                song.title.slice(0,2).toUpperCase()%>
+            <%= song.title.slice(0,2).toUpperCase()%>
         </div>
         <div class="song-details">
             <div class="song-title">
@@ -21,6 +20,38 @@
     <% }) %>
 
         <script>
+            class Song {
+                constructor(song) {
+                    this.id = song.id;
+                    this.title = song.title;
+                    this.artist = song.artist;
+                    this.duration = song.duration
+                    this.elem = null;
+                }
+
+                render(timeslotId) {
+                    const songDiv = document.createElement("li");
+                    songDiv.dataset.id = this.id
+                    songDiv.textContent = `${this.title} - ${this.artist} - ${this.duration}`
+                    this.elem = songDiv;
+                    // check if timeslotId provided so we can add delete capabilities
+                    if (timeslotId !== null) {
+                        songDiv.addEventListener("click", async () => {
+                            await fetch(
+                                `/api/timeslot/${timeslotId}/deleteSong?id=${this.id}`,
+                                { method: "DELETE" }
+                            )
+                                .then(() => {
+                                    document.querySelector(
+                                        ".song-playlist-songs"
+                                    ).removeChild(this.elem)
+                                })
+                        });
+                    }
+                    return songDiv;
+                }
+            }
+
             async function addSong(id, title, artist, duration) {
                 const song = {
                     id: parseInt(id),
@@ -33,15 +64,34 @@
                     method: "POST", headers: {
                         "Content-Type": "application/json"
                     }, body: JSON.stringify(song)
-                }).then((response) => response.text())
-                    .then((html) => {
-                        document.querySelector(".timeslot-playlist-songs").innerHTML = html + `                                    <button
-                                            class="add-song-button"
-                                            onclick="window.TimeslotModal.handleAddSongClick(event)">+
-                                            add
-                                            song</button>`;
-                        document.querySelector(".song-playlist-songs").innerHTML = html
-                    });
-            }
+                }).then(() => {
+                    const playlistElement = document.querySelector(".song-playlist-songs").appendChild(new Song(song).render(timeslotId));
+                });
+                // document.querySelector(".timeslot-playlist-songs").innerHTML = html + `                                    <button
+                //                     class="add-song-button"
+                //                     onclick="window.TimeslotModal.handleAddSongClick(event)">+
+                //                     add
+                //                     song</button>`;
 
+                // // add song delete click event to playlist songs
+                // document.querySelector(".song-playlist-songs")
+                //     .childNodes.forEach((song) => {
+                // song.addEventListener("click", async () => {
+                //     await fetch(
+                //         `/api/timeslot/${timeslotId}/deleteSong?id=${song.dataset.id}`,
+                //         { method: "DELETE" }
+                //     )
+                //         .then((response) => {
+                //             return response.text();
+                //         })
+                //         .then((html) => {
+                //             console.log(html);
+                //             document.querySelector(
+                //                 ".song-playlist-songs"
+                //             ).innerHTML = html;
+                //         });
+                // });
+                //     });
+
+            }
         </script>

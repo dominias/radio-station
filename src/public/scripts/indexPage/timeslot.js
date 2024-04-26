@@ -2,12 +2,15 @@ class Day {
 	// date Date object, array of times
 	constructor(date, times) {
 		this.date = date;
-		this.dayName = date.toLocaleDateString("en-US", { weekday: "short" }).toUpperCase();
+		this.dayName = date
+			.toLocaleDateString("en-US", { weekday: "short" })
+			.toUpperCase();
 		this.dayMonthString = date.getDate() + "/" + (date.getMonth() + 1);
 		this.times = times;
 		this.timeslots = []; // holds Timeslot objects
 	}
 
+	// render each day
 	render() {
 		const elem = document.createElement("div");
 		elem.className = "day";
@@ -39,7 +42,16 @@ class Day {
 		// Append timeslots to day
 
 		this.times.forEach(async (time, i) => {
-			this.timeslots.push(new Timeslot(this.date, time));
+			this.timeslots.push(
+				new Timeslot(
+					"" +
+						this.date.getFullYear() +
+						this.date.getMonth() +
+						this.date.getDate(),
+					time
+				)
+			);
+			timeslotContainer.appendChild(this.timeslots[i].render());
 			// Retrieve timeslot data from DB
 			await fetch(`/api/getTimeslot/${this.timeslots[i].id}`)
 				.then((response) => {
@@ -47,10 +59,13 @@ class Day {
 				})
 				.then((timeslot) => {
 					if (timeslot !== null) {
-						console.log(timeslot);
+						this.timeslots[i].id = timeslot.id;
+						this.timeslots[i].day = timeslot.day;
+						this.timeslots[i].time = timeslot.time;
+						this.timeslots[i].setDJ(timeslot.dj);
+						this.timeslots[i].songs = timeslot.songs;
 					}
 				});
-			timeslotContainer.appendChild(this.timeslots[i].render());
 		});
 
 		return elem;
@@ -63,7 +78,6 @@ class Timeslot {
 		this.id = day + time;
 		this.day = day;
 		this.time = time;
-		this.DJid = null;
 		this.DJ = null;
 		this.taken = false;
 		this.songs = [];

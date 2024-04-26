@@ -21,7 +21,7 @@ input[type="submit"] {
 
 .timeslot-modal-container {
 	height: 100%;
-	width: 50%;
+	width: 60%;
 	padding: 4rem;
 	background-color: var(--black);
 	border-radius: 30px;
@@ -119,8 +119,8 @@ input[type="submit"] {
 	overflow: auto;
 }
 
-ol {
-	list-style-position: inside;
+ul {
+	list-style-type: none;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -131,6 +131,8 @@ ol {
 
 li,
 .timeslot-playlist-songs button {
+	list-style-type: none;
+	font-size: 15px;
 	width: 100%;
 	background-color: var(--black);
 	font-weight: normal;

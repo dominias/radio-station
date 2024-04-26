@@ -13,7 +13,10 @@ const connectLivereload = require("connect-livereload");
 // open livereload high port and start to watch public directory for changes
 const liveReloadServer = livereload.createServer();
 console.log(__dirname);
-liveReloadServer.watch([path.join(__dirname, "public"), path.join(__dirname, "views")]);
+liveReloadServer.watch([
+	path.join(__dirname, "public"),
+	path.join(__dirname, "views"),
+]);
 
 // ping browser on Express boot, once browser has reconnected and handshaken
 liveReloadServer.server.once("connection", () => {
@@ -42,6 +45,7 @@ timeslotHandler.handleCreateTimeslot(app);
 songHandler.getSongsFromPlaylist(app);
 songHandler.querySongList(app);
 songHandler.addSongToPlaylist(app);
+songHandler.removeSongToPlaylist(app);
 
 // for anything else, display 404 errors
 app.use((req, resp) => {

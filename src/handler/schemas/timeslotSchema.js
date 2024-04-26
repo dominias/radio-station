@@ -4,9 +4,11 @@ const timeslotSchema = new mongoose.Schema({
 	id: String,
 	day: String,
 	time: String,
-	DJid: Number,
-	DJ: String,
-  taken: Boolean,
+	dj: {
+		id: Number,
+		name: String,
+	},
+	taken: Boolean,
 	songs: [
 		{
 			id: Number,

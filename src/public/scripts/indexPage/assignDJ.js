@@ -3,8 +3,12 @@ class DJ {
 		this.id = id;
 		this.name = name;
 		this.elem = elem;
-		const iconNode = document.querySelector(".assigndj-overview-section .icon");
-		const nameNode = document.querySelector(".assigndj-overview-section .name");
+		const iconNode = document.querySelector(
+			".assigndj-overview-section .icon"
+		);
+		const nameNode = document.querySelector(
+			".assigndj-overview-section .name"
+		);
 		elem.addEventListener("mouseover", (e) => {
 			iconNode.textContent = name.slice(0, 2).toUpperCase();
 			nameNode.textContent = name;
@@ -23,9 +27,11 @@ class DJ {
 		const newDJ = e.target.DJ; // taken from event.[param] from eventlistener
 		e.stopPropagation();
 		// try to check for existing timeslot with DJ
-		const currentDJ = await fetch(`/api/getTimeslot/${timeslot.id}`).then((response) => {
-			return response.json();
-		});
+		const currentDJ = await fetch(`/api/getTimeslot/${timeslot.id}`).then(
+			(response) => {
+				return response.json();
+			}
+		);
 		// If no dj in timeslot, create timeslot and assign w dj
 		if (currentDJ === null) {
 			await fetch("/api/createTimeslot", {
@@ -37,8 +43,10 @@ class DJ {
 					id: timeslot.day + timeslot.time,
 					day: timeslot.day,
 					time: timeslot.time,
-					DJid: newDJ.id,
-					DJ: newDJ.name,
+					dj: {
+						id: newDJ.id,
+						name: newDJ.name,
+					},
 					taken: true,
 					songs: [],
 				}),
@@ -53,13 +61,14 @@ class DJ {
 				},
 				body: JSON.stringify({
 					id: timeslot.day + timeslot.time,
-					DJid: newDJ.id,
-					DJ: newDJ.name,
+					dj: {
+						id: newDJ.id,
+						name: newDJ.name,
+					},
 				}),
 			});
 		}
 		timeslot.setDJ(newDJ);
-		window.TimeslotModal.setPlaylistSongs(timeslot);
 		window.TimeslotModal.setTimeslotDJ(timeslot.DJ);
 		window.DJModal.closeAssignDJModal(e);
 		window.TimeslotModal.openTimeSlotModal(timeslot);
@@ -77,7 +86,13 @@ class DJModal {
 		const data = await resp.json();
 		this.DJs = [];
 		data.forEach((dj) => {
-			this.DJs.push(new DJ(dj.id, dj.name, document.querySelector(`[data-id='${dj.id}']`)));
+			this.DJs.push(
+				new DJ(
+					dj.id,
+					dj.name,
+					document.querySelector(`[data-id='${dj.id}']`)
+				)
+			);
 		});
 	};
 	openAssignDJModal(timeslot) {
@@ -95,7 +110,8 @@ class DJModal {
 		} else {
 			DJcontainers.forEach((DJcontainer) => {
 				if (e.target === DJcontainer) {
-					document.querySelector(".assign-dj-modal").style.display = "none";
+					document.querySelector(".assign-dj-modal").style.display =
+						"none";
 					return;
 				}
 			});

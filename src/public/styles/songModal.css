@@ -81,8 +81,8 @@ input[type="submit"] {
 	overflow: auto;
 }
 
-ol {
-	list-style-position: inside;
+ul {
+	list-style-type: none;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -92,6 +92,8 @@ ol {
 }
 
 li {
+	list-style-position: none;
+	font-size: 15px;
 	width: 100%;
 	background-color: var(--black);
 	font-weight: normal;
@@ -102,8 +104,9 @@ li {
 	color: var(--white);
 }
 
-li:hover {
-	background-color: var(--purple);
+.song-playlist-songs li:hover {
+	cursor: pointer;
+	background-color: var(--red);
 	transform: scale(1.025);
 }
 

@@ -1,11 +1,12 @@
-const songsCollection = require("./schemas/songSchema"); // songs collection database
+const songsModel = require("./schemas/songSchema"); // songs collection database
 const timeslotsModel = require("./schemas/timeslotSchema"); // dj collection database
 
 // Initial Fetch
 const initSongs = async () => {
 	let songs = [];
-	await songsCollection
+	await songsModel
 		.find()
+		.sort("title artist")
 		.then((data) => {
 			songs = data;
 		})
@@ -21,17 +22,15 @@ const initSongs = async () => {
 			duration: song.duration,
 		};
 	});
-	return songs.sort(songComparison);
+	return songs;
 };
 
-// for later use when fetching again from DB of timeslot
+// fetches songs from timeslot id
 const getSongsFromPlaylist = (app) => {
 	app.get("/api/timeslot/:id", (req, resp) => {
 		timeslotsModel.findOne({ id: req.params.id }).then((data) => {
 			if (data !== null) {
-				resp.render("partials/playlistSongs.ejs", {
-					playlist: data.songs,
-				});
+				resp.json(data.songs);
 			}
 		});
 	});
@@ -39,56 +38,63 @@ const getSongsFromPlaylist = (app) => {
 
 const querySongList = (app) => {
 	app.get("/api/searchSongs", (req, resp) => {
-		const query = req.query.q.toLowerCase();
-
-		// Filter the songs based on the search query
-		const filteredSongs = songs.filter((song) => song.title.toLowerCase().includes(query) || song.artist.toLowerCase().includes(query));
-		filteredSongs.sort(songComparison);
-		resp.render("partials/songList.ejs", {
-			songs: filteredSongs,
-		});
+		const query = req.query.q;
+		const regex = new RegExp(query, "i");
+		songsModel
+			.find({
+				$or: [
+					{ title: { $regex: regex } },
+					{ artist: { $regex: regex } },
+				],
+			})
+			.sort("title artist")
+			.then((res) => {
+				resp.render("partials/songList.ejs", {
+					songs: res,
+				});
+			})
+			.catch((err) => {
+				console.log(err);
+			});
 	});
 };
 
 const addSongToPlaylist = (app) => {
-	app.post("/api/timeslot/:id/addSong", (req, resp) => {
-		const newSong = req.body;
-		const idToFind = req.params.id;
-		const foundTimeslot = timeslotDB.getData().find((timeslot) => timeslot.id === idToFind);
-		// If song already in playlist
-		if (
-			foundTimeslot.songs.some((song) => {
-				return song.title === newSong.title && song.artist === newSong.artist;
-			})
-		) {
-			return;
-		}
-		foundTimeslot.songs.push(newSong);
-		resp.render("partials/playlistSongs.ejs", {
-			playlist: foundTimeslot.songs,
+	app.post("/api/timeslot/:id/addSong", async (req, resp) => {
+		const doc = await timeslotsModel.findOne({
+			id: req.params.id,
+			songs: {
+				$not: {
+					$elemMatch: req.body,
+				},
+			},
 		});
+		if (doc !== null) {
+			doc.songs.push(req.body);
+			await doc.save();
+			resp.json(doc.songs);
+		}
 	});
 };
 
-function songComparison(songA, songB) {
-	if (songA.title.toLowerCase() < songB.title.toLowerCase()) {
-		return -1;
-	}
-	if (songA.title.toLowerCase() > songB.title.toLowerCase()) {
-		return 1;
-	}
-	if (songA.artist.toLowerCase() < songB.artist.toLowerCase()) {
-		return -1;
-	}
-	if (songA.artist.toLowerCase() > songB.artist.toLowerCase()) {
-		return 1;
-	}
-	return 0;
-}
+const removeSongToPlaylist = (app) => {
+	app.delete("/api/timeslot/:id/deleteSong", async (req, resp) => {
+		const doc = await timeslotsModel.findOneAndUpdate(
+			{ id: req.params.id },
+			{ $pull: { songs: { id: req.query.id } } },
+			{ new: true }
+		);
+		console.log(doc.songs);
+		resp.render("partials/playlistSongs.ejs", {
+			playlist: doc.songs,
+		});
+	});
+};
 
 module.exports = {
 	initSongs,
 	getSongsFromPlaylist,
 	querySongList,
 	addSongToPlaylist,
+	removeSongToPlaylist,
 };

@@ -27,7 +27,7 @@ const timeSchema = new mongoose.Schema({
 			number: Number,
 			timeslots: [
 				{
-					id: Number,
+					id: String,
 					dj: Number,
 					listId: Number,
 					day: String,

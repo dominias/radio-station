@@ -160,4 +160,25 @@ document.addEventListener("DOMContentLoaded", () => {
 			}
 		});
 	});
+
+	document.querySelector(".logout-button").addEventListener("click", (e) => {
+		document.querySelectorAll(".taken").forEach((elem) => {
+			elem.classList.remove("taken");
+		});
+		daysElementsShown.forEach((day) => {
+			day.timeslots.forEach((timeslot) => {
+				timeslot.id = "";
+				timeslot.day = "";
+				timeslot.time = "";
+				timeslot.DJ = null;
+				timeslot.taken = false;
+				timeslot.songs = [];
+			});
+		});
+		const filler = document.createElement("div");
+		filler.style.width = "319.84px";
+		document.querySelector(".profile").innerHTML = "";
+		document.querySelector(".profile").appendChild(filler);
+		e.stopPropagation();
+	});
 });

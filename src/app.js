@@ -42,6 +42,7 @@ djHandler.handleGetDJList(app);
 timeslotHandler.getTimeslot(app);
 timeslotHandler.updateTimeslot(app);
 timeslotHandler.handleCreateTimeslot(app);
+timeslotHandler.createTimes(app);
 songHandler.getSongsFromPlaylist(app);
 songHandler.querySongList(app);
 songHandler.addSongToPlaylist(app);

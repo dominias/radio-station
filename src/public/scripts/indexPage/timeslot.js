@@ -2,7 +2,9 @@ class Day {
 	// date Date object, array of times
 	constructor(date, times, dayNumber) {
 		this.date = date;
-		this.dayName = date.toLocaleDateString("en-US", { weekday: "short" }).toUpperCase();
+		this.dayName = date
+			.toLocaleDateString("en-US", { weekday: "short" })
+			.toUpperCase();
 		this.dayMonthString = date.getDate() + "/" + (date.getMonth() + 1);
 		this.times = times;
 		this.dayNumber = dayNumber; // new
@@ -35,24 +37,50 @@ class Day {
 		timeslotContainer.className = "timeslot-container";
 		elem.appendChild(timeslotContainer);
 		// Append timeslots to day
-
 		this.times.forEach(async (time, i) => {
-			this.timeslots.push(new Timeslot("" + this.date.getFullYear() + this.date.getMonth() + this.date.getDate(), time));
-			timeslotContainer.appendChild(this.timeslots[i].render());
-			// Retrieve timeslot data from DB
-			await fetch(`/api/getTimeslot/${this.timeslots[i].id}`)
+			const ts = new Timeslot(
+				"" +
+					this.date.getFullYear() +
+					this.date.getMonth() +
+					this.date.getDate(),
+				time
+			);
+			timeslotContainer.appendChild(ts.render(this.dayNumber));
+			// Retrieve timeslot data from DB given day id
+			await fetch(`/api/getTimeslot/${this.dayNumber}/${ts.id}`)
 				.then((response) => {
 					return response.json();
 				})
-				.then((timeslot) => {
+				.then(async (timeslot) => {
 					if (timeslot !== null) {
-						this.timeslots[i].id = timeslot.id;
-						this.timeslots[i].day = timeslot.day;
-						this.timeslots[i].time = timeslot.time;
-						this.timeslots[i].setDJ(timeslot.dj);
-						this.timeslots[i].songs = timeslot.songs;
+						ts.id = timeslot.id;
+						ts.day = timeslot.day;
+						ts.time = timeslot.time;
+						ts.setDJ(timeslot.dj);
+						ts.songs = timeslot.songs;
+					}
+					// no timeslot yet, make it using day number
+					else {
+						const defaultTimeslot = {
+							id: ts.id,
+							dj: ts.DJ,
+							listId: ts.listId,
+							day: ts.day,
+							time: ts.time,
+							taken: ts.taken,
+						};
+						await fetch(`/api/createTimeslot/${this.dayNumber}`, {
+							method: "POST",
+							headers: {
+								"Content-Type": "application/json",
+							},
+							body: JSON.stringify(defaultTimeslot),
+						})
+							.then((response) => response.json())
+							.then((res) => console.log(res));
 					}
 				});
+			this.timeslots.push(ts);
 		});
 
 		return elem;
@@ -63,9 +91,10 @@ class Day {
 class Timeslot {
 	constructor(day, time) {
 		this.id = day + time;
+		this.DJ = -1;
+		this.listId = -1;
 		this.day = day;
 		this.time = time;
-		this.DJ = null;
 		this.taken = false;
 		this.songs = [];
 		this.element = null;
@@ -78,7 +107,7 @@ class Timeslot {
 		this.element.classList.add("taken");
 	}
 
-	render() {
+	render(dayNumber) {
 		const elem = document.createElement("div");
 		elem.className = "timeslot";
 		elem.textContent = this.time;
@@ -98,9 +127,10 @@ class Timeslot {
 }
 
 // Renders all of the displayed days from current date
-function renderDaysShown(currentDate, times, dayNumbers) {
+async function renderDaysShown(currentDate, times, dayNumbers) {
 	let dayElements = [];
 	let containerElement = document.querySelector(".day-container");
+
 	for (let i = 0; i <= currentDate.getDay(); i++) {
 		let date = new Date(currentDate);
 		date.setDate(currentDate.getDate() - (currentDate.getDay() - i));
@@ -117,16 +147,6 @@ function renderDaysShown(currentDate, times, dayNumbers) {
 
 	return dayElements;
 }
-
-// Updates the shown weeks given the weekPointer
-function updateDaysShown(weekPointer, times) {
-	let dayContainer = document.querySelector(".day-container");
-	dayContainer.innerHTML = "";
-	let newDate = new Date();
-	newDate.setDate(newDate.getDate() + 7 * weekPointer);
-	return renderDaysShown(newDate, times);
-}
-
 // Add times
 document.addEventListener("DOMContentLoaded", async () => {
 	const dayNumbers = [0, 1, 2, 3, 4, 5, 6];
@@ -134,38 +154,23 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 	let currDate = new Date(2024, 3, 26);
 
+	// Render database schema
+	await fetch("/api/createTimes/").then(response => response.json()).then(res => console.log(res));
+
 	// Holds all day divs
-	let daysElementsShown = renderDaysShown(currDate, times, dayNumbers);
+	let daysElementsShown = await renderDaysShown(currDate, times, dayNumbers);
 
 	let listDates = [];
 	daysElementsShown.forEach((date, i) => {
 		let listTimeslots = [];
+		date.timeslots.forEach;
 
 		listDates.push({
 			number: dayNumbers[i],
-			timeslots,
+			timeslots: listTimeslots,
 		});
 	});
 
-	// // Render database schema
-	// await fetch("/api/createTimes", {
-	// 	method: "POST",
-	// 	headers: {
-	// 		"Content-Type": "application/json",
-	// 	},
-	// 	body: JSON.stringify({
-	// 		id: 0,
-	// 		week: "",
-	// 		time: timeslot.time,
-	// 		dates:
-	// 		dj: {
-	// 			id: newDJ.id,
-	// 			name: newDJ.name,
-	// 		},
-	// 		taken: true,
-	// 		songs: [],
-	// 	}),
-	// });
 	document.querySelector(".logout-button").addEventListener("click", (e) => {
 		document.querySelectorAll(".taken").forEach((elem) => {
 			elem.classList.remove("taken");

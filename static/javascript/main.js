@@ -35,9 +35,9 @@ document.addEventListener("DOMContentLoaded", function() {
 function vis(id) {
     let button = document.getElementById(id);
 
-    button.style.color = (button.style.color != "gray") ? "gray" : "black";
+    button.style.color = (button.style.color != "gray") ? "gray" : "#c2bcbc";
 
-    let change = (id == "slot-vis") ? document.getElementById("timeslots") : document.getElementById("weekdates");
+    let change = document.getElementById("weekdates");
 
     change.style.display = (change.style.display != "none") ? "none" : "grid";
  }
@@ -62,7 +62,6 @@ function vis(id) {
                 if (timeslot.taken) elem.setAttribute("class", "timeslot-closed");
                 else elem.setAttribute("class", "timeslot")
                 
-                elem.setAttribute("id", timeslot.id);
                 elem.appendChild(text);
 
                 timeslotList.append(elem);
@@ -78,7 +77,7 @@ function vis(id) {
                     open = document.getElementById("slot-open");
                     open.innerText = (!timeslot.taken) ? "OPEN" : "TAKEN";
                     
-                    open.style.backgroundColor = (!timeslot.taken) ? "#47EBB4" : "red";
+                    open.style.backgroundColor = (!timeslot.taken) ? "#2B8768" : "red";
                     
                     let listButton = document.getElementById("slot-list");
 

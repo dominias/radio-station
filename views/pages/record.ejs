@@ -15,11 +15,12 @@
                 </section>
 
                 <%- include('../partials/date-time'); %>
-            </header>
-            <hr>
 
-            <section>
                 
+                <%- include('../partials/user-section'); %>
+            </header>
+
+            <section>    
                 <% if(records.length == 0) { %>
                     <h3 style="text-align: center;">None exist for this search.</h3>
                 <% } %>
@@ -43,7 +44,6 @@
                         </li>
                     <% }); %>
                 </ul>
-                <hr>
             </section>
         </main>
     </body>

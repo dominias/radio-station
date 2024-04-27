@@ -11,9 +11,12 @@
             <header>
                 <section class="header-tool">
                     <button><a href="/">Main</a></button>
+                    <button><a href="/list">Lists</a></button>
                 </section>
 
                 <%- include('../partials/date-time'); %>
+
+                <%- include('../partials/user-section'); %>
             </header>
             <hr>
 
@@ -23,9 +26,8 @@
                 <% } %>
 
                 <% lists.forEach(list => { %>
-                    <h3> <%= list.name %> <button onClick="location.href='/list/add/record/<%= list.id %>'" type="button">+</button></h3>
-                    <hr>
                     <ul class="records">
+                        <h3> <%= list.name %> <button onClick="location.href='/list/add/record/<%= list.id %>'" type="button">+</button></h3>
                         <li>
                             <p><b> Name    </b></p>
                             <p><b> Creator </b></p>
@@ -43,7 +45,6 @@
                         </li>
                         <% }); %>
                     </ul>
-                    <hr>
                 <% }); %>
             </section>
         </main>

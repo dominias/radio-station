@@ -52,10 +52,6 @@ app.get('/', function(req, res) {
         });
 });
 
-app.get('/extra', function(req, res) {
-    res.render('pages/extra');
-})
-
 const listRouter = require('./handlers/listRouter.js');
 listRouter.handleLists(app, List, Record);
 listRouter.handleListName(app, List, Record);

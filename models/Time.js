@@ -8,7 +8,8 @@ const timeSchema = new mongoose.Schema({
             number: Number,
             timeslots: [
                 {
-                    id: Number,
+                    id: String,
+                    day: String,
                     user: Number,
                     list: Number,
                     name: String,

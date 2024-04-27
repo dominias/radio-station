@@ -7,7 +7,8 @@
                 "number": 1,
                 "timeslots": [
                     {
-                        "id": 1,
+                        "id": "",
+                        "day": "",
                         "user": 0,
                         "list": 0,
                         "name": "Admin",
@@ -15,7 +16,8 @@
                         "taken": true
                     },
                     {
-                        "id": 2,
+                        "id": "",
+                        "day": "",
                         "user": null,
                         "list": null,
                         "name": "None",
@@ -23,7 +25,8 @@
                         "taken": false
                     },
                     {
-                        "id": 3,
+                        "id": "",
+                        "day": "",
                         "user": null,
                         "list": null,
                         "name": "None",
@@ -31,7 +34,8 @@
                         "taken": false
                     },
                     {
-                        "id": 4,
+                        "id": "",
+                        "day": "",
                         "user": null,
                         "list": null,
                         "name": "None",
@@ -39,7 +43,8 @@
                         "taken": false
                     },
                     {
-                        "id": 5,
+                        "id": "",
+                        "day": "",
                         "user": null,
                         "list": null,
                         "name": "None",
@@ -47,7 +52,8 @@
                         "taken": false
                     },
                     {
-                        "id": 6,
+                        "id": "",
+                        "day": "",
                         "user": 2,
                         "list": 1,
                         "name": "Smith",
@@ -55,7 +61,8 @@
                         "taken": true
                     },
                     {
-                        "id": 7,
+                        "id": "",
+                        "day": "",
                         "user": null,
                         "list": null,
                         "name": "None",
@@ -63,7 +70,8 @@
                         "taken": false
                     },
                     {
-                        "id": 8,
+                        "id": "",
+                        "day": "",
                         "user": 1,
                         "list": 2,
                         "name": "James",
@@ -71,11 +79,93 @@
                         "taken": true
                     },
                     {
-                        "id": 9,
+                        "id": "",
+                        "day": "",
                         "user": null,
                         "list": null,
                         "name": "None",
                         "time": "7:45 PM",
+                        "taken": false
+                    },
+                    {
+                        "id": "",
+                        "day": "",
+                        "user": null,
+                        "list": null,
+                        "name": "None",
+                        "time": "6:15 PM",
+                        "taken": false
+                    },
+                    {
+                        "id": "",
+                        "day": "",
+                        "user": null,
+                        "list": null,
+                        "name": "None",
+                        "time": "6:30 PM",
+                        "taken": false
+                    },
+                    {
+                        "id": "",
+                        "day": "",
+                        "user": null,
+                        "list": null,
+                        "name": "None",
+                        "time": "6:45 PM",
+                        "taken": false
+                    },
+                    {
+                        "id": "",
+                        "day": "",
+                        "user": null,
+                        "list": null,
+                        "name": "None",
+                        "time": "6:15 PM",
+                        "taken": false
+                    },
+                    {
+                        "id": "",
+                        "day": "",
+                        "user": null,
+                        "list": null,
+                        "name": "None",
+                        "time": "6:30 PM",
+                        "taken": false
+                    },
+                    {
+                        "id": "",
+                        "day": "",
+                        "user": null,
+                        "list": null,
+                        "name": "None",
+                        "time": "6:45 PM",
+                        "taken": false
+                    },
+                    {
+                        "id": "",
+                        "day": "",
+                        "user": null,
+                        "list": null,
+                        "name": "None",
+                        "time": "6:15 PM",
+                        "taken": false
+                    },
+                    {
+                        "id": "",
+                        "day": "",
+                        "user": null,
+                        "list": null,
+                        "name": "None",
+                        "time": "6:30 PM",
+                        "taken": false
+                    },
+                    {
+                        "id": "",
+                        "day": "",
+                        "user": null,
+                        "list": null,
+                        "name": "None",
+                        "time": "6:45 PM",
                         "taken": false
                     }
                 ]

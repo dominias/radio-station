@@ -19,6 +19,7 @@ input[type="submit"] {
 	cursor: pointer;
 }
 
+
 .main-section {
 	height: 100%;
 	width: 100%;
@@ -30,31 +31,6 @@ input[type="submit"] {
 	align-items: center;
 	justify-content: center;
 	gap: 1rem;
-}
-
-.back,
-.forward {
-	flex: 0 0 auto;
-	align-items: center;
-	justify-content: center;
-	height: 3rem;
-	width: 3rem;
-	border-radius: 50%;
-	background-color: transparent;
-	border: 1px solid var(--dark-purple);
-	color: var(--white);
-	font-weight: bolder;
-	font-size: 20px;
-	box-shadow: 0px 0px 20px 0px #722ae656;
-	transition: all 0.15s ease-in-out;
-}
-
-.back:hover,
-.forward:hover {
-	cursor: pointer;
-	background-color: var(--purple);
-	box-shadow: 0px 0px 20px 0px #7f2fff8c;
-	transform: scale(1.05);
 }
 
 .day-container {

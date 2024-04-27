@@ -1,5 +1,5 @@
 const songsModel = require("./schemas/songSchema"); // songs collection database
-const timeslotsModel = require("./schemas/timeslotSchema"); // dj collection database
+const timesModel = require("./schemas/timeSchema"); // dj collection database
 
 // Initial Fetch
 const initSongs = async () => {
@@ -28,7 +28,7 @@ const initSongs = async () => {
 // fetches songs from timeslot id
 const getSongsFromPlaylist = (app) => {
 	app.get("/api/timeslot/:id", (req, resp) => {
-		timeslotsModel.findOne({ id: req.params.id }).then((data) => {
+		timesModel.findOne({ id: req.params.id }).then((data) => {
 			if (data !== null) {
 				resp.json(data.songs);
 			}
@@ -61,7 +61,7 @@ const querySongList = (app) => {
 
 const addSongToPlaylist = (app) => {
 	app.post("/api/timeslot/:id/addSong", async (req, resp) => {
-		const doc = await timeslotsModel.findOne({
+		const doc = await timesModel.findOne({
 			id: req.params.id,
 			songs: {
 				$not: {
@@ -79,7 +79,7 @@ const addSongToPlaylist = (app) => {
 
 const removeSongFromPlaylist = (app) => {
 	app.delete("/api/timeslot/:id/deleteSong", async (req, resp) => {
-		const doc = await timeslotsModel.findOneAndUpdate(
+		const doc = await timesModel.findOneAndUpdate(
 			{ id: req.params.id },
 			{ $pull: { songs: { id: req.query.id } } },
 			{ new: true }

@@ -26,4 +26,11 @@ document.addEventListener("DOMContentLoaded", () => {
 		e.preventDefault();
 		validate();
 	});
+
+	document.querySelector(".logout-button").addEventListener("click", (e) => {
+		const filler = document.createElement("div");
+		filler.style.width = "319.84px";
+		document.querySelector(".profile").innerHTML = "";
+		document.querySelector(".profile").appendChild(filler);
+	});
 });

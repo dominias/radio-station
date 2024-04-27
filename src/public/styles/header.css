@@ -12,12 +12,11 @@
 }
 
 .dummy {
-	min-width: 232.09px;
+	min-width: 319.84px;
 	display: flex;
 	align-items: center;
 }
 .dummy a {
-	text-decoration: none;
 	font-weight: bold;
 	font-size: x-large;
 	color: var(--white);
@@ -92,4 +91,19 @@
 .user-details span {
 	font-size: x-small;
 	color: rgba(255, 255, 255, 0.427);
+}
+
+.logout-button {
+	background-color: var(--red);
+	color: var(--white);
+	padding: 8px;
+	border-radius: 10px;
+	box-shadow: var(--shadow);
+	font-weight: bold;
+	transition: transform 0.1s ease-in-out;
+}
+
+.logout-button:hover {
+	background-color: rgb(204, 20, 20);
+	transform: scale(1.05);
 }

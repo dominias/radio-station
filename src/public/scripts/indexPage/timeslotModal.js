@@ -15,7 +15,6 @@ class TimeslotModal {
 				".timeslot-playlist-songs"
 			);
 			if (this.timeslot !== null) {
-				console.log("prev:", this.timeslot, "\n", "new:", timeslot);
 				// remove prev timeslot songs
 				removeSongElements(timeslotModalPlaylist, this.timeslot);
 			}
